@@ -1,161 +1,282 @@
 <!DOCTYPE html>
-<html>
+<html lang="nl">
 <head>
     <meta charset="UTF-8" />
-    <title>Catch Me If You Can - Over-the-Top Fireworks!</title>
+    <title>Modulo Spel - Tik het Juiste Antwoord!</title>
     <style>
-        /* We'll move the container (which holds the GIPHY iframe) around. */
-        #trickContainer {
-            position: absolute;
-            left: 100px; /* Initial position */
-            top: 100px;
-            cursor: pointer;
-            transition: left 0.1s, top 0.1s; /* Smooth movement */
+        html, body {
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
+            overflow: hidden; /* Voorkom scrollbars */
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
         }
 
-        /* Simple scoreboard styling */
-        #scoreboard {
+        /* Titel/score bovenin */
+        #header {
             position: fixed;
-            top: 10px;
-            left: 10px;
+            top: 0; left: 0;
+            width: 100%;
+            background: #fff;
+            border-bottom: 2px solid #ccc;
             padding: 10px;
-            background: lightyellow;
-            border: 1px solid #ccc;
-            font-family: sans-serif;
-            font-weight: bold;
-            z-index: 99999;
+            box-sizing: border-box;
+            z-index: 10000; /* Zorg dat dit altijd boven de bubbels ligt */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Fireworks canvas sits on top, covers full screen, pointer-events none
-           so it doesn't block clicks */
-        #fireworksCanvas {
-            pointer-events: none;
-            position: fixed;
-            top: 0;
+        #question {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        #scoreboard {
+            font-size: 1.2rem;
+        }
+
+        /* Container voor alle antwoord-bubbels */
+        #bubbleContainer {
+            position: absolute;
+            top: 60px; /* Onder de header */
             left: 0;
+            width: 100%;
+            height: calc(100% - 60px);
+        }
+
+        /* Standaard styling voor bubbels */
+        .bubble {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(0, 180, 255, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            user-select: none;     /* Geen tekstselectie */
+            touch-action: none;    /* Beter voor mobiel */
+            transition: background-color 0.2s;
+        }
+        .bubble:hover {
+            background-color: rgba(0, 180, 255, 1);
+        }
+
+        /* Canvas voor vuurwerk */
+        #fireworksCanvas {
+            pointer-events: none;      /* Kliks gaan door naar achterliggende elementen */
+            position: fixed;
+            top: 0; left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 9999; /* Above everything else except scoreboard */
+            z-index: 9999;
         }
     </style>
 </head>
 <body>
 
-<!-- Scoreboard to track hits and misses -->
-<div id="scoreboard">
-    Hits: <span id="hits">0</span> |
-    Misses: <span id="misses">0</span>
+<!-- Bovenbalk met som en score -->
+<div id="header">
+    <div id="question">0 mod 0 = ?</div>
+    <div id="scoreboard">Goed: <span id="correctCount">0</span></div>
 </div>
 
-<!-- This container holds the GIPHY iframe -->
-<div id="trickContainer">
-    <iframe
-            src="https://giphy.com/embed/B3MhGf58ONQVa"
-            width="480"
-            height="269"
-            style="pointer-events: none"
-            frameborder="0"
-            class="giphy-embed"
-            allowfullscreen
-    ></iframe>
-</div>
+<!-- Container voor de bubbels (antwoorden) -->
+<div id="bubbleContainer"></div>
 
-<!-- A canvas for the fireworks display -->
+<!-- Canvas voor het vuurwerk -->
 <canvas id="fireworksCanvas"></canvas>
 
 <script>
-    // Scoreboard elements
-    const hitsSpan = document.getElementById('hits');
-    const missesSpan = document.getElementById('misses');
+    // =====================================
+    //           SPEL VARIABELEN
+    // =====================================
 
-    // We'll track the score in these variables
-    let hits = 0;
-    let misses = 0;
+    const questionEl = document.getElementById('question');
+    const correctCountEl = document.getElementById('correctCount');
+    const bubbleContainer = document.getElementById('bubbleContainer');
 
-    // Reference to our trick container
-    const trickContainer = document.getElementById('trickContainer');
+    // Houdt bij hoeveel vragen goed zijn beantwoord
+    let correctAnswers = 0;
+    // Hoeveel antwoorden tonen we? (1 juiste + (n-1) foute)
+    const NUMBER_OF_ANSWERS = 4;
 
-    // =============================
-    //  Move the Container Randomly
-    // =============================
-    function moveTrickContainer() {
-        // Get the container's current width/height
-        const rect = trickContainer.getBoundingClientRect();
-        const containerWidth = rect.width;
-        const containerHeight = rect.height;
+    // Afhankelijk of we in 'vuurwerkfase' zijn
+    let inFireworkPhase = false;
 
-        // Calculate random positions within the window
-        // so the entire container remains visible
-        const maxLeft = window.innerWidth - containerWidth;
-        const maxTop = window.innerHeight - containerHeight;
-
-        const randomLeft = Math.floor(Math.random() * maxLeft);
-        const randomTop = Math.floor(Math.random() * maxTop);
-
-        trickContainer.style.left = randomLeft + 'px';
-        trickContainer.style.top = randomTop + 'px';
-    }
-
-    // On desktop, "mouseover" to dodge. On mobile, "touchstart."
-    trickContainer.addEventListener('mouseover', moveTrickContainer);
-    trickContainer.addEventListener('touchstart', moveTrickContainer);
-
-    // If container is clicked/tapped, increment hits
-    trickContainer.addEventListener('click', (event) => {
-        event.stopPropagation(); // Don’t let it bubble up to document
-        hits += 1;
-        hitsSpan.textContent = hits;
-
-        // Once we hit 10, fireworks time!
-        if (hits === 10) {
-            startFireworks();
-        }
-    });
-
-    // Anywhere else (the document), it's a miss
-    document.addEventListener('click', (event) => {
-        if (!trickContainer.contains(event.target)) {
-            misses += 1;
-            missesSpan.textContent = misses;
-        }
-    });
-
-
-    // =============================
-    //        Fireworks Code
-    // =============================
-
+    // Fireworks
     const canvas = document.getElementById('fireworksCanvas');
     const ctx = canvas.getContext('2d');
+    let fireworks = [];
+    let fireworksInterval = null;
+    let fireworksAnimationFrame = null;
 
-    // Resize canvas to fill the screen
+    // =====================================
+    //        HELPER FUNCTIES
+    // =====================================
+
     function resizeCanvas() {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     }
     window.addEventListener('resize', resizeCanvas);
-    resizeCanvas(); // Initial sizing
+    resizeCanvas();
 
-    // Data structure for each "spark" in the firework
+    // Willekeurige integer tussen min en max (inclusief max)
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    /**
+     * Genereer een willekeurige modulo-som en retourneer een object:
+     * {
+     *   a: number,
+     *   b: number,
+     *   correct: (a % b),
+     *   answers: [correct, ...fouteAntwoorden]
+     * }
+     */
+    function generateModuloQuestion() {
+        // Kies a en b in het bereik 1..300 (en b niet 0)
+        let a = getRandomInt(1, 300);
+        let b = getRandomInt(1, 300);
+
+        // Bereken het juiste antwoord
+        const correct = a % b;
+
+        // We genereren NUMBER_OF_ANSWERS-1 willekeurige foute antwoorden
+        const answers = [correct];
+        while (answers.length < NUMBER_OF_ANSWERS) {
+            let wrong = getRandomInt(0, 300);
+            // Zorg dat we geen duplicaat hebben
+            if (!answers.includes(wrong)) {
+                answers.push(wrong);
+            }
+        }
+
+        // We husselen de volgorde van de antwoorden zodat de juiste niet altijd op index 0 staat
+        answers.sort(() => Math.random() - 0.5);
+
+        return {
+            a,
+            b,
+            correct,
+            answers,
+        };
+    }
+
+    /**
+     * Hulpfunctie om een willekeurig geheel getal in [min, max] te krijgen.
+     */
+    function getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+    // =====================================
+    //      BUBBELS MAKEN EN VERPLAATSEN
+    // =====================================
+
+    let bubbleElements = [];  // Bewaar referenties van de actuele bubbels
+    let bubbleMoveInterval = null;
+
+    /**
+     * Plaats alle bubbels op willekeurige posities binnen bubbleContainer
+     */
+    function positionBubbles() {
+        // Breedte en hoogte van de container
+        const containerWidth = bubbleContainer.clientWidth;
+        const containerHeight = bubbleContainer.clientHeight;
+
+        bubbleElements.forEach(bubble => {
+            // Elk bubbel-element is 80x80px (zie CSS)
+            const maxLeft = containerWidth - 80;
+            const maxTop = containerHeight - 80;
+            const left = getRandomInt(0, maxLeft);
+            const top = getRandomInt(0, maxTop);
+
+            bubble.style.left = `${left}px`;
+            bubble.style.top = `${top}px`;
+        });
+    }
+
+    /**
+     * Verwijder alle bubbels uit de container
+     */
+    function clearBubbles() {
+        bubbleElements.forEach(bubble => bubble.remove());
+        bubbleElements = [];
+    }
+
+    // =====================================
+    //           VRAAG STARTEN
+    // =====================================
+
+    function showNewQuestion() {
+        inFireworkPhase = false;
+
+        // Genereer nieuwe modulo-som
+        const { a, b, correct, answers } = generateModuloQuestion();
+        questionEl.textContent = `${a} mod ${b} = ?`;
+
+        // Oude bubbels opruimen
+        clearBubbles();
+
+        // Maak voor elk antwoord een bubbel
+        answers.forEach(answer => {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.textContent = answer;
+
+            // Als je op een bubbel klikt/tikt
+            bubble.addEventListener('click', () => {
+                if (inFireworkPhase) return; // Geen dubbele kliks bij vuurwerk
+                if (answer === correct) {
+                    // Juiste antwoord
+                    correctAnswers++;
+                    correctCountEl.textContent = correctAnswers;
+                    startFireworks();
+                } else {
+                    // Fout, evt. feedback
+                    bubble.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
+                }
+            });
+
+            bubbleContainer.appendChild(bubble);
+            bubbleElements.push(bubble);
+        });
+
+        // Start (her)positionering van bubbels elke 2 seconden
+        positionBubbles();
+        if (bubbleMoveInterval) clearInterval(bubbleMoveInterval);
+        bubbleMoveInterval = setInterval(positionBubbles, 1500);
+    }
+
+    // =====================================
+    //           VUURWERK LOGICA
+    // =====================================
+
     class FireworkParticle {
         constructor(x, y, angle, speed, color) {
             this.x = x;
             this.y = y;
-            this.angle = angle; // in radians
+            this.angle = angle;
             this.speed = speed;
             this.color = color;
-            this.alpha = 1;                // will fade out
-            this.decay = 0.01 + Math.random() * 0.02; // how quickly alpha drops
-            this.radius = 2 + Math.random() * 3;      // random radius (spark size)
+            this.alpha = 1;
+            this.decay = 0.01 + Math.random() * 0.02;
+            this.radius = 2 + Math.random() * 3;
         }
 
         update() {
-            // Move in the direction of angle
             this.x += Math.cos(this.angle) * this.speed;
             this.y += Math.sin(this.angle) * this.speed;
-            // Gradually slow down
             this.speed *= 0.97;
-            // Fade out
             this.alpha -= this.decay;
         }
 
@@ -170,76 +291,66 @@
         }
     }
 
-    // We'll keep an array of "active" fireworks (bursts)
-    let fireworks = [];
-
-    // Create a single burst (explosion) of many particles
+    // Creëer veel deeltjes (explosie) op x,y
     function createFireworkBurst(x, y) {
-        // Over-the-top: More sparks per burst
-        const numParticles = 150 + Math.floor(Math.random() * 50);
+        const numParticles = 100 + Math.floor(Math.random() * 50);
         const colors = [
             '#ff0040', '#ff8c00', '#ffff00',
             '#00ff00', '#00bfff', '#9932cc',
             '#ff69b4', '#00ffff', '#f0e68c'
         ];
-
         for (let i = 0; i < numParticles; i++) {
-            const angle = Math.random() * 2 * Math.PI; // random direction
-            const speed = 2 + Math.random() * 7;       // random speed
+            const angle = Math.random() * 2 * Math.PI;
+            const speed = 2 + Math.random() * 7;
             const color = colors[Math.floor(Math.random() * colors.length)];
             fireworks.push(new FireworkParticle(x, y, angle, speed, color));
         }
     }
 
-    // We'll periodically create random bursts
-    let fireworksInterval = null;    // reference to setInterval
-    let fireworksAnimationFrame = 0; // requestAnimationFrame handle
-
-    // Main animation loop for fireworks
     function animateFireworks() {
         fireworksAnimationFrame = requestAnimationFrame(animateFireworks);
-
-        // Clear the canvas each frame
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Update & draw each particle
-        fireworks.forEach((particle) => {
-            particle.update();
-            particle.draw(ctx);
+        fireworks.forEach((p) => {
+            p.update();
+            p.draw(ctx);
         });
-
-        // Remove dead particles
         fireworks = fireworks.filter(p => p.alpha > 0);
     }
 
-    // Start a short fireworks show
     function startFireworks() {
-        // Clear out old fireworks if any
-        fireworks = [];
+        inFireworkPhase = true;
 
-        // Kick off an animation loop
+        // Stop de bubbels (geen herpositionering meer)
+        clearInterval(bubbleMoveInterval);
+
+        // In deze periode mag je niet opnieuw klikken
+        fireworks = [];
         cancelAnimationFrame(fireworksAnimationFrame);
         animateFireworks();
 
-        // Over-the-top: More frequent bursts (every 200 ms)
+        // Elke 300 ms een nieuwe explosie
         fireworksInterval = setInterval(() => {
-            // random position, can be anywhere
             const x = Math.random() * canvas.width;
-            const y = Math.random() * canvas.height * 0.6; // top ~60% of screen
+            const y = Math.random() * canvas.height * 0.6;
             createFireworkBurst(x, y);
-        }, 200);
+        }, 300);
 
-        // Over-the-top: Let fireworks run for 8 seconds
+        // Na 5 seconden stoppen we met vuurwerk en tonen we de volgende som
         setTimeout(() => {
             clearInterval(fireworksInterval);
-            // Let existing sparks finish fading out...
+            // Even laten uitfaden...
             setTimeout(() => {
                 cancelAnimationFrame(fireworksAnimationFrame);
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }, 4000);
-        }, 8000);
+                showNewQuestion();
+            }, 2000);
+        }, 5000);
     }
-</script>
 
+    // =====================================
+    //   START: Toon direct eerste vraag
+    // =====================================
+    showNewQuestion();
+</script>
 </body>
 </html>
