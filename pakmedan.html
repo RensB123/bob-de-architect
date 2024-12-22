@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Catch Me If You Can - Over-the-Top Fireworks!</title>
+    <style>
+        /* We'll move the container (which holds the GIPHY iframe) around. */
+        #trickContainer {
+            position: absolute;
+            left: 100px; /* Initial position */
+            top: 100px;
+            cursor: pointer;
+            transition: left 0.1s, top 0.1s; /* Smooth movement */
+        }
+
+        /* Simple scoreboard styling */
+        #scoreboard {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            padding: 10px;
+            background: lightyellow;
+            border: 1px solid #ccc;
+            font-family: sans-serif;
+            font-weight: bold;
+            z-index: 99999;
+        }
+
+        /* Fireworks canvas sits on top, covers full screen, pointer-events none
+           so it doesn't block clicks */
+        #fireworksCanvas {
+            pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999; /* Above everything else except scoreboard */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Scoreboard to track hits and misses -->
+<div id="scoreboard">
+    Hits: <span id="hits">0</span> |
+    Misses: <span id="misses">0</span>
+</div>
+
+<!-- This container holds the GIPHY iframe -->
+<div id="trickContainer">
+    <iframe
+            src="https://giphy.com/embed/B3MhGf58ONQVa"
+            width="480"
+            height="269"
+            style="pointer-events: none"
+            frameborder="0"
+            class="giphy-embed"
+            allowfullscreen
+    ></iframe>
+</div>
+
+<!-- A canvas for the fireworks display -->
+<canvas id="fireworksCanvas"></canvas>
+
+<script>
+    // Scoreboard elements
+    const hitsSpan = document.getElementById('hits');
+    const missesSpan = document.getElementById('misses');
+
+    // We'll track the score in these variables
+    let hits = 0;
+    let misses = 0;
+
+    // Reference to our trick container
+    const trickContainer = document.getElementById('trickContainer');
+
+    // =============================
+    //  Move the Container Randomly
+    // =============================
+    function moveTrickContainer() {
+        // Get the container's current width/height
+        const rect = trickContainer.getBoundingClientRect();
+        const containerWidth = rect.width;
+        const containerHeight = rect.height;
+
+        // Calculate random positions within the window
+        // so the entire container remains visible
+        const maxLeft = window.innerWidth - containerWidth;
+        const maxTop = window.innerHeight - containerHeight;
+
+        const randomLeft = Math.floor(Math.random() * maxLeft);
+        const randomTop = Math.floor(Math.random() * maxTop);
+
+        trickContainer.style.left = randomLeft + 'px';
+        trickContainer.style.top = randomTop + 'px';
+    }
+
+    // On desktop, "mouseover" to dodge. On mobile, "touchstart."
+    trickContainer.addEventListener('mouseover', moveTrickContainer);
+    trickContainer.addEventListener('touchstart', moveTrickContainer);
+
+    // If container is clicked/tapped, increment hits
+    trickContainer.addEventListener('click', (event) => {
+        event.stopPropagation(); // Don’t let it bubble up to document
+        hits += 1;
+        hitsSpan.textContent = hits;
+
+        // Once we hit 10, fireworks time!
+        if (hits === 10) {
+            startFireworks();
+        }
+    });
+
+    // Anywhere else (the document), it's a miss
+    document.addEventListener('click', (event) => {
+        if (!trickContainer.contains(event.target)) {
+            misses += 1;
+            missesSpan.textContent = misses;
+        }
+    });
+
+
+    // =============================
+    //        Fireworks Code
+    // =============================
+
+    const canvas = document.getElementById('fireworksCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Resize canvas to fill the screen
+    function resizeCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas(); // Initial sizing
+
+    // Data structure for each "spark" in the firework
+    class FireworkParticle {
+        constructor(x, y, angle, speed, color) {
+            this.x = x;
+            this.y = y;
+            this.angle = angle; // in radians
+            this.speed = speed;
+            this.color = color;
+            this.alpha = 1;                // will fade out
+            this.decay = 0.01 + Math.random() * 0.02; // how quickly alpha drops
+            this.radius = 2 + Math.random() * 3;      // random radius (spark size)
+        }
+
+        update() {
+            // Move in the direction of angle
+            this.x += Math.cos(this.angle) * this.speed;
+            this.y += Math.sin(this.angle) * this.speed;
+            // Gradually slow down
+            this.speed *= 0.97;
+            // Fade out
+            this.alpha -= this.decay;
+        }
+
+        draw(ctx) {
+            ctx.save();
+            ctx.globalAlpha = this.alpha;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    // We'll keep an array of "active" fireworks (bursts)
+    let fireworks = [];
+
+    // Create a single burst (explosion) of many particles
+    function createFireworkBurst(x, y) {
+        // Over-the-top: More sparks per burst
+        const numParticles = 150 + Math.floor(Math.random() * 50);
+        const colors = [
+            '#ff0040', '#ff8c00', '#ffff00',
+            '#00ff00', '#00bfff', '#9932cc',
+            '#ff69b4', '#00ffff', '#f0e68c'
+        ];
+
+        for (let i = 0; i < numParticles; i++) {
+            const angle = Math.random() * 2 * Math.PI; // random direction
+            const speed = 2 + Math.random() * 7;       // random speed
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            fireworks.push(new FireworkParticle(x, y, angle, speed, color));
+        }
+    }
+
+    // We'll periodically create random bursts
+    let fireworksInterval = null;    // reference to setInterval
+    let fireworksAnimationFrame = 0; // requestAnimationFrame handle
+
+    // Main animation loop for fireworks
+    function animateFireworks() {
+        fireworksAnimationFrame = requestAnimationFrame(animateFireworks);
+
+        // Clear the canvas each frame
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Update & draw each particle
+        fireworks.forEach((particle) => {
+            particle.update();
+            particle.draw(ctx);
+        });
+
+        // Remove dead particles
+        fireworks = fireworks.filter(p => p.alpha > 0);
+    }
+
+    // Start a short fireworks show
+    function startFireworks() {
+        // Clear out old fireworks if any
+        fireworks = [];
+
+        // Kick off an animation loop
+        cancelAnimationFrame(fireworksAnimationFrame);
+        animateFireworks();
+
+        // Over-the-top: More frequent bursts (every 200 ms)
+        fireworksInterval = setInterval(() => {
+            // random position, can be anywhere
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height * 0.6; // top ~60% of screen
+            createFireworkBurst(x, y);
+        }, 200);
+
+        // Over-the-top: Let fireworks run for 8 seconds
+        setTimeout(() => {
+            clearInterval(fireworksInterval);
+            // Let existing sparks finish fading out...
+            setTimeout(() => {
+                cancelAnimationFrame(fireworksAnimationFrame);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }, 4000);
+        }, 8000);
+    }
+</script>
+
+</body>
+</html>
