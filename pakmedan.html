@@ -158,9 +158,26 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    // Genereer een willekeurige modulo-som
+    // =====================================
+    //    SNELHEID VAN BUBBELS VERHOGEN
+    // =====================================
+    /**
+     * Increases the magnitude of dx/dy for all bubbles by 1.
+     * If dx is negative, we subtract 1 to go "more negative".
+     * If dx is positive, we add 1 to go "more positive".
+     */
+    function speedUpBubbles() {
+        bubbleData.forEach(b => {
+            b.dx = (b.dx < 0) ? (b.dx - 1) : (b.dx + 1);
+            b.dy = (b.dy < 0) ? (b.dy - 1) : (b.dy + 1);
+        });
+    }
+
+    // =====================================
+    //     GENEREER EEN MODULO-VRAAG
+    // =====================================
     function generateModuloQuestion() {
-        // Kies a en b in het bereik 1..300
+        // Kies a in het bereik 1..300, b in 1..100
         let a = getRandomInt(1, 300);
         let b = getRandomInt(1, 100);
 
@@ -211,12 +228,14 @@
             bubble.addEventListener('click', () => {
                 if (inFireworkPhase) return; // geen dubbele klik
                 if (answer === correct) {
+                    // Goed antwoord
                     correctAnswers++;
                     correctCountEl.textContent = correctAnswers;
                     startFireworks();
                 } else {
-                    // Fout antwoord feedback
+                    // Fout antwoord -> kleur rood & sneller bubbels
                     bubble.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
+                    speedUpBubbles();
                 }
             });
 
@@ -228,9 +247,10 @@
             const x = Math.floor(Math.random() * (containerWidth - BUBBLE_SIZE));
             const y = Math.floor(Math.random() * (containerHeight - BUBBLE_SIZE));
 
-            // Willekeurige snelheid (dx, dy)
-            const dx = (Math.random() * 3) - 4.5;
-            const dy = (Math.random() * 3) - 4.5;
+            // Willekeurige snelheid (dx, dy) - starts negative or slow if wanted
+            // Adjust if you want them to possibly move in both directions
+            const dx = (Math.random() * 3) - 2.5;
+            const dy = (Math.random() * 3) - 2.5;
 
             // Initiële CSS-positie
             bubble.style.left = x + 'px';
@@ -345,7 +365,7 @@
         inFireworkPhase = true;
 
         // Bubbels stoppen (optioneel)
-        // => we've made animateBubbles() skip if inFireworkPhase == true
+        // => animateBubbles() will skip if inFireworkPhase == true
 
         // Reset fireworks arrays and start animating
         fireworks = [];
