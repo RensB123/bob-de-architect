@@ -63,37 +63,13 @@
             z-index: 9999;
         }
 
-        .bubble {
-            position: absolute;
-            width: 120px;    /* previously 80px */
-            height: 120px;   /* previously 80px */
-            border-radius: 50%;
-            cursor: pointer;
-
-            background: radial-gradient(
-                    circle at 35% 35%,
-                    rgba(255, 255, 255, 0.6) 20%,
-                    rgba(0, 180, 255, 0.3) 70%,
-                    rgba(0, 180, 255, 0) 100%
-            );
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-            transition: background-color 0.2s, transform 0.2s;
-
-            text-align: center;
-            line-height: 120px; /* match the new height so text is centered */
-            color: #fff;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
         /************************************************************
-         * SOAP BUBBLE STYLE
-         * We use a radial gradient for a reflective look,
-         * plus a subtle outer glow (box-shadow).
+         * SOAP BUBBLE STYLE - 160px diameter
          ************************************************************/
         .bubble {
             position: absolute;
-            width: 80px;
-            height: 80px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             cursor: pointer;
 
@@ -105,12 +81,14 @@
             );
             box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
             transition: background-color 0.2s, transform 0.2s;
+
             text-align: center;
-            line-height: 80px;
+            line-height: 160px; /* match the new height so text is centered */
             color: #fff;
             font-weight: bold;
             font-size: 1.2rem;
         }
+
         .bubble:hover {
             background: radial-gradient(
                     circle at 35% 35%,
@@ -160,8 +138,9 @@
     let fireworksAnimationFrame = null;
 
     // Data-structuur voor bubbels: [{ el, x, y, dx, dy }, ...]
-    let bubbleData = [];
+    // Gebruiken 160px (gelijk aan CSS) voor bots-check
     const BUBBLE_SIZE = 160;
+    let bubbleData = [];
 
     // =====================================
     //     CANVAS RESIZING (VUURWERK)
@@ -221,7 +200,9 @@
         return { a, b, correct, answers };
     }
 
-    // Alles opruimen als nieuwe vraag begint
+    // =====================================
+    //   OPRUIMEN VAN OUDE BUBBELS
+    // =====================================
     function clearBubbles() {
         bubbleData.forEach(b => b.el.remove());
         bubbleData = [];
@@ -246,21 +227,25 @@
             bubble.className = 'bubble';
             bubble.textContent = answer;
 
-            // Click/tap event
-            bubble.addEventListener('click', () => {
-                if (inFireworkPhase) return; // geen dubbele klik
+            // Main "tap/click" logic in a function so we can reuse for both events
+            function handleTap() {
+                if (inFireworkPhase) return;
                 if (answer === correct) {
-                    // Goed antwoord
                     correctAnswers++;
                     correctCountEl.textContent = correctAnswers;
                     startFireworks();
                 } else {
-                    // Fout antwoord -> kleur rood & sneller bubbels
                     bubble.style.backgroundColor = 'rgba(255, 0, 0, 0.8)';
                     speedUpBubbles();
                 }
-            });
+            }
 
+            // Click event (desktop)
+            bubble.addEventListener('click', handleTap);
+            // Touch event (mobile)
+            bubble.addEventListener('touchstart', handleTap);
+
+            // Add to DOM
             bubbleContainer.appendChild(bubble);
 
             // Willekeurige startpositie
@@ -269,20 +254,19 @@
             const x = Math.floor(Math.random() * (containerWidth - BUBBLE_SIZE));
             const y = Math.floor(Math.random() * (containerHeight - BUBBLE_SIZE));
 
-            // Willekeurige snelheid (dx, dy) - starts negative or slow if wanted
-            // Adjust if you want them to possibly move in both directions
+            // Willekeurige snelheid (dx, dy)
             const dx = (Math.random() * 3) - 2.5;
             const dy = (Math.random() * 3) - 2.5;
 
-            // Initiële CSS-positie
+            // Initiële positie in CSS
             bubble.style.left = x + 'px';
             bubble.style.top = y + 'px';
 
-            // Opslaan in array
+            // Sla op in array
             bubbleData.push({ el: bubble, x, y, dx, dy });
         });
 
-        // Start de animatie (als niet al bezig)
+        // Start de animatie
         requestAnimationFrame(animateBubbles);
     }
 
@@ -290,7 +274,6 @@
     //    ANIMEER DE BUBBELS (FLOATING)
     // =====================================
     function animateBubbles() {
-        // Als je bubbels helemaal wilt pauzeren bij vuurwerk:
         if (inFireworkPhase) {
             return;
         }
@@ -386,8 +369,7 @@
     function startFireworks() {
         inFireworkPhase = true;
 
-        // Bubbels stoppen (optioneel)
-        // => animateBubbles() will skip if inFireworkPhase == true
+        // Bubbels stoppen (animateBubbles() will skip if inFireworkPhase == true)
 
         // Reset fireworks arrays and start animating
         fireworks = [];
