@@ -13,11 +13,328 @@
     <tw-noscript>JavaScript needs to be enabled to play bobs-twine.</tw-noscript>
   </noscript>
 </tw-story>
-<tw-storydata name="Leertraject Priemgetallen" startnode="1" creator="ChatGPT" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="A1B2C3D4-E5F6-7890-1234-56789ABCDEFF" options="" tags="" zoom="1" hidden>
+<tw-storydata name="bobs-twine" startnode="1" creator="Twine" creator-version="2.10.0" format="Harlowe" format-version="3.3.9" ifid="196EEE72-4297-420F-A2FD-D81B607C3AF8" options="" tags="" zoom="1" hidden>
+    <style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">
+        /* Set the background gradient of the story */
+        tw-story {
+            background: linear-gradient(to right, yellow, pink); /* Gradient from yellow to pink */
+            color: black; /* Set text color to black */
+        }
+        /* Ensure links are visible */
+        tw-link {
+            color: blue; /* Set link color to blue for visibility */
+        }
+    </style>
+    <script role="script" id="twine-user-script" type="text/twine-javascript"></script>
 
-    <!-- Passage 1: Start -->
-    <tw-passagedata pid="1" name="Start" tags="" position="100,100" size="100,100">
-       Hoi Bob! Ik hoop dat je een leuke laatste schoolweek van het jaar hebt gehad! Heb je goed opgelet met de breuken? Volgens mij kende je die al lang dus dat zal wel makkelijk zijn gegaan.
+    <!-- 1 -->
+    <tw-passagedata pid="1" name="StoryMenu" tags="" position="0,0" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Goedemorgen (of middag) Bob!</h2>
+        <p style="color: #333;">
+            Ik heb even een startpagina toegevoegd zodat je niet elke keer helemaal tot het einde hoeft door te klikken.
+        </p>
+        <h3>
+            Jouw naamgenoot! :D
+        </h3>
+        <iframe src="https://giphy.com/embed/26DNj8iaWFhIUo7g4"  width="480" height="341" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+        <p>
+            [[Klik hier om de priemgetallen route te volgen|Start]]
+            [[Klik hier voor het nieuwste onderdeel, modulo berekenen|Modulo]]
+        </p>
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="2" name="Modulo" tags="" position="700,100" size="100,100"
+                    style="background-color: #FF69B4; border: 4px dashed #FFFAAA; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive; color: #fff;">
+        <h2>Oke Bob, we gaan het nu hebben over modulo!</h2>
+        <p>
+            Modulo is een wiskundige bewerking die je kunt gebruiken om te kijken wat de rest is
+            als je een getal door een ander getal deelt.
+        </p>
+
+        <iframe
+                src="https://giphy.com/embed/cgqZ5e5K3K2RvcSber"
+                width="480"
+                height="271"
+                style="pointer-events: none;"
+                frameBorder="0"
+                class="giphy-embed"
+                allowFullScreen>
+        </iframe>
+
+        <p>
+            Stel je voor dat je 10 donuts hebt en je wilt ze verdelen over 3 mensen.
+            Hoeveel donuts krijgt iedereen dan? Je kunt 3 groepen van 3 donuts maken en
+            dan blijft er nog 1 donut over. Die ene donut is de <strong>rest</strong>.
+            Als je dit in wiskundige termen zou schrijven dan zou je zeggen dat
+            <strong>10 modulo 3</strong> gelijk is aan 1.
+        </p>
+        <p>
+            Als je bijvoorbeeld <strong>10 modulo 2</strong> zou doen dan is de rest 0
+            omdat je de 10 donuts precies in 2 groepen van 5 kunt verdelen.
+        </p>
+        <p>Begrijp je het een beetje? Laten we het samen verder ontdekken!</p>
+        <p>
+    <span style="background-color: #FFFAAA; color: #FF69B4; padding: 5px 10px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+      [[Naar de eerste oefening!|OefeningModulo1]]
+    </span>
+        </p>
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="3" name="OefeningModulo1" tags="" position="100,300" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Oke, we gaan verder!</h2>
+        <p>
+            Misschien is het voorbeeld van de donuts niet het beste, want als wij met zijn tweeën
+            zouden zijn en we hadden drie donuts, dan sneden we er natuurlijk gewoon een door midden
+            en aten we allebei 1.5 donut. Dus de volgende vraag gaat over knikkers,
+            die kun je niet zo makkelijk door midden snijden.
+        </p
+
+        <p>
+            Stel je voor: je hebt <strong>25 knikkers</strong> en je kunt zakjes maken waar telkens
+            <strong>4 knikkers</strong> in passen. Hoeveel complete zakjes kun je maken waar precies 4 knikkers in zitten?
+            <br>En dan nu de vraag: <em>hoeveel knikkers blijven er over?</em>
+        </p>
+
+        <iframe
+                src="https://giphy.com/embed/8FlypZDVSG8qs8UDU8"
+                width="480"
+                height="271"
+                style="pointer-events: none;"
+                frameBorder="0"
+                class="giphy-embed"
+                allowFullScreen>
+        </iframe>
+
+
+        <p style="margin-top: 15px;">
+            [[1 knikker|OefeningModulo1Antwoord1]]<br>
+            [[2 knikkers|OefeningModulo1AntwoordFout]]<br>
+            [[3 knikkers|OefeningModulo1AntwoordFout]]<br>
+            [[4 knikkers|OefeningModulo1AntwoordFout]]
+        </p>
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="4" name="OefeningModulo1Antwoord1" tags="" position="300,300" size="100,100"
+                    style="background-color: #FF69B4; border: 4px dashed #FFFAAA; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive; color: #fff;">
+        <h2>Goed gedaan!</h2>
+        <p>
+            Je kunt <strong>6 zakjes</strong> maken met 4 knikkers en je houdt er <strong>1</strong> over.
+            Dus <strong>25 modulo 4</strong> is <strong>1</strong>.
+        </p>
+        <p>
+            Is het nog te makkelijk? Dan gaan we snel door!
+        </p>
+        <p>
+    <span style="background-color: #FFFAAA; color: #FF69B4; padding: 5px 10px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+      [[Nu wordt het moeilijker, ben je er klaar voor?|UitlegGroteModuloGetallen]]
+    </span>
+        </p>
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="5" name="OefeningModulo1AntwoordFout" tags="" position="500,300" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Helaas!</h2>
+        <p>Dat is niet het goede antwoord. Probeer het nog een keer!</p>
+        <p>
+    <span style="background-color: #FF69B4; color: #FFFAAA; padding: 5px 10px; text-decoration: none; border-radius: 6px; font-weight: bold;">
+      [[Terug naar de vraag|OefeningModulo1]]
+    </span>
+
+
+            <iframe
+                    src="https://giphy.com/embed/cgqZ5e5K3K2RvcSber"
+                    width="480"
+                    height="271"
+                    style="pointer-events: none;"
+                    frameBorder="0"
+                    class="giphy-embed"
+                    allowFullScreen>
+            </iframe>
+
+        </p>
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="6" name="UitlegGroteModuloGetallen" tags="" position="700,300" size="100,100">
+        <h3>Hoe kunnen we handmatig grote getallen modulo doen?</h3>
+        <p>Bij kleine getallen is het niet zo moeilijk he Bob? Maar wat nou als we hele grote getallen krijgen, dan moeten we het stapje voor stapje gaan doen. Ik leg hier uit hoe je dat doet. In deze uitleg gaan we stap voor stap 1234 modulo 7 doen.</p> <ol> <li> <strong>We kijken naar het getal van links naar rechts</strong><br> Het getal is <code>1 2 3 4</code> (duizend-tweehonderdvierendertig). </li> <li> <strong>Begin met het eerste cijfer</strong><br> Het eerste cijfer is <code>1</code>.<br> Is <code>1</code> groter of gelijk aan <code>7</code>? Nee, <code>1</code> is kleiner dan <code>7</code>, dus we kunnen het niet in groepjes van <code>7</code> verdelen (we houden dan alles over).<br> Omdat <code>1</code> te klein is, pakken we er het volgende cijfer bij. Dan wordt het samen <code>12</code> (van de “1” en de “2”). </li> <li> <strong>Nu heb je 12</strong><br> <code>12</code> is wél groter dan <code>7</code>, dus we kunnen kijken hoe vaak de <code>7</code> in <code>12</code> past.<br> <code>7</code> past <code>1</code> keer in <code>12</code>, en dan hou je <code>5</code> over (want <code>12 - 7 = 5</code>). </li> <li> <strong>Gebruik de “overgebleven” 5 met het volgende cijfer</strong><br> Je had <code>5</code> over. Het volgende cijfer in “<code>1234</code>” is <code>3</code>.<br> Als je die <code>3</code> aan de <code>5</code> vastplakt, krijg je <code>53</code>. </li> <li> <strong>Deel 53 door 7</strong><br> Kijk hoe vaak <code>7</code> in <code>53</code> past.<br> <code>7</code> past <code>7</code> keer in <code>53</code> (<code>7 x 7 = 49</code>), en dan hou je <code>4</code> over (<code>53 - 49 = 4</code>). </li> <li> <strong>Gebruik weer de “overgebleven” 4 met het volgende cijfer</strong><br> Nu is je rest <code>4</code>.<br> Het laatste cijfer uit “<code>1234</code>” is <code>4</code>.<br> Vastplakken: <code>4</code> (de rest) en <code>4</code> (het cijfer) wordt samen <code>44</code>. </li> <li> <strong>Deel 44 door 7</strong><br> <code>7</code> past <code>6</code> keer in <code>44</code> (<code>7 x 6 = 42</code>), en dan hou je <code>2</code> over.<br> Dat “<code>2</code>” is je rest als je <code>1234</code> door <code>7</code> deelt. </li> </ol> <p> Dus <code>1234 modulo 7 = 2</code>. </p>
+
+        * [[Door naar de volgende oefening|OefeningModulo2]]
+    </tw-passagedata>
+    <!-- 6 -->
+    <tw-passagedata pid="6" name="OefeningModulo2" tags="" position="700,300" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Oke Bob, en nu het volgende!</h2>
+        <p>
+            Stel je voor, je bent op een mooie dag in de Efteling en je staat in de rij voor
+            de Max en Moritz achtbaan. Er staan <strong>997 kinderen</strong> te wachten om in deze
+            dubbele achtbaan te stappen. De attractie heeft twee treintjes naast elkaar (Max en Moritz)
+            en kan in totaal <strong>36 kinderen</strong> per rit laten instappen (18 kinderen per trein).
+        </p>
+        <p>
+            <em>Vraag 1:</em> Hoeveel ritjes zijn er nodig om alle 997 kinderen te laten genieten van deze achtbaan?
+        </p>
+        <p>
+            [[27 ritjes|OefeningModulo2AntwoordFout]]<br>
+            [[28 ritjes|OefeningModulo2Antwoord1]]<br>
+            [[29 ritjes|OefeningModulo2AntwoordFout]]<br>
+            [[30 ritjes|OefeningModulo2AntwoordFout]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="7" name="OefeningModulo2Antwoord1" tags="" position="100,500" size="100,100"
+                    style="background-color: #FF69B4; border: 4px dashed #FFFAAA; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive; color: #fff;">
+        <h2>Goed gedaan!</h2>
+        <p>
+            Er zijn <strong>28 ritjes</strong> nodig om alle <strong>997 kinderen</strong> te laten
+            genieten van de achtbaan. Dat betekent wel dat er bij het laatste ritje een aantal stoelen
+            leeg zijn, want <code>28 × 36 = 1008</code>. En er stonden maar <code>997</code> kinderen
+            in de rij.
+        </p>
+        <p>
+            [[Nog een oefening|OefeningModulo3]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="8" name="OefeningModulo2AntwoordFout" tags="" position="300,500" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Helaas!</h2>
+        <p>Dat is niet het goede antwoord. Probeer het nog een keer!</p>
+        <p>
+            [[Terug naar de vraag|OefeningModulo2]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="9" name="OefeningModulo3" tags="" position="500,500" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Lekker bezig Bob!</h2>
+        <p>
+            Laten we nog een oefening doen.
+        </p>
+        <p>
+            Stel je voor: Het is ergens in de kerstvakantie en het is winter Efteling en het is heel erg druk.
+            Jij bent inmiddels misschien al wel te groot voor Max en Morritz, dus we gaan eens kijken
+            hoe het met de rij bij de Python is.
+            <br>Er staan in totaal <strong>4999 mensen</strong> in de rij voor de Python.
+            <br>Deze achtbaan heeft <strong>1 trein</strong> met in totaal <strong>28 plaatsen</strong>.
+        </p>
+
+        <iframe
+                src="https://giphy.com/embed/l49JRyzCXPbDwvihO"
+                width="480"
+                height="271"
+                style="pointer-events: none;"
+                frameBorder="0"
+                class="giphy-embed"
+                allowFullScreen>
+        </iframe>
+
+        <p>
+            De vraag is nu echter: <em>hoeveel mensen zitten er in de allerlaatste rit van de dag?</em>
+            <br><small>Let op: elke rit is dus helemaal vol behalve de allerlaatste.</small>
+        </p>
+        <p style="margin-top: 15px;">
+            [[1 persoon|OefeningModulo3AntwoordFout]]<br>
+            [[4 personen|OefeningModulo3AntwoordFout]]<br>
+            [[5 personen|OefeningModulo3AntwoordFout]]<br>
+            [[7 personen|OefeningModulo3AntwoordFout]]<br>
+            [[10 personen|OefeningModulo3AntwoordFout]]<br>
+            [[12 personen|OefeningModulo3AntwoordFout]]<br>
+            <iframe
+                    src="https://giphy.com/embed/l0HUhjsgv9MeeaqWY"
+                    width="480"
+                    height="271"
+                    style="pointer-events: none;"
+                    frameBorder="0"
+                    class="giphy-embed"
+                    allowFullScreen>
+            </iframe>
+
+
+
+            [[15 personen|OefeningModulo3AntwoordGoed]]<br>
+            [[18 personen|OefeningModulo3AntwoordFout]]<br>
+            [[25 personen|OefeningModulo3AntwoordFout]]<br>
+            [[28 personen|OefeningModulo3AntwoordFout]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="10" name="OefeningModulo3AntwoordFout" tags="" position="700,500" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Helaas!</h2>
+        <p>Dat is niet het goede antwoord. Probeer het nog een keer!</p>
+        <p>
+            [[Terug naar de vraag|OefeningModulo3]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="11" name="OefeningModulo3AntwoordGoed" tags="" position="100,700" size="100,100"
+                    style="background-color: #FF69B4; border: 4px dashed #FFFAAA; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive; color: #fff;">
+        <h2>Goed gedaan Bob!</h2>
+        <p>
+            Er zitten <strong>15 mensen</strong> in de allerlaatste rit van de dag.
+            De Python heeft <strong>4999</strong> mensen in de rij en er passen <strong>28</strong>
+            mensen in een trein. Dat betekent dat <code>4999 modulo 28 = 15</code> mensen
+            in de allerlaatste trein zitten.
+        </p>
+        <p>
+            [[Nog wat extra toelichting|ExtraToelichtingModulo]]
+        </p>
+    </tw-passagedata>
+
+    <tw-passagedata pid="12" name="ExtraToelichtingModulo" tags="" position="300,700" size="100,100"
+                    style="background-color: #FFFAAA; border: 4px dashed #FF69B4; border-radius: 10px; padding: 20px; font-family: Comic Sans MS, cursive;">
+        <h2 style="color: #FF69B4;">Lekker bezig vriend!</h2>
+        <p>
+            Je hebt nu alle modulo sommetjes goed gemaakt. Met kleine getallen is het natuurlijk makkelijker
+            dan met grote getallen. Maar zolang je het rustig aan en stap voor stap doet, dan kom je er wel uit.
+        </p>
+        <p>
+            Wat ik nog niet verteld heb, is dat het modulo-tekentje er hetzelfde uitziet als het procentteken.
+            Zo dus: <code>%</code>.
+        </p>
+        <p>
+            Dat betekent dat als je dit ziet staan: <code>10 % 2 = 0</code>, je dat ook kunt lezen als
+            <code>10 modulo 2 = 0</code>. En als je de vraag krijgt: "Wat is 15 % 4?" dan is het antwoord 3.
+        </p>
+        <p>
+            Als je de modulo heel snel wilt berekenen met je rekenmachine (wat natuurlijk nog even niet mocht),
+            dan doe je het volgende:
+        </p>
+        <p>
+            <strong>100 % 7 ?</strong><br>
+            Dan doe je <code>100 / 7 = 14,2857142857... </code><br>
+            Pak het getal achter de komma (<code>0,2857142857...</code>) en vermenigvuldig dat met 7:
+            dat wordt ongeveer <code>2</code>.<br>
+            <strong>2</strong> is dus het restgetal als je 100 deelt door 7.
+            Dus <code>100 % 7 = 2</code>.
+        </p>
+        <p> Lekker bezig Bob! Je hebt weer wat nieuws geleerd vandaag. Weer een stapje dichterbij het bedenken van je eigen sleutels zodat we geheime berichten kunnen sturen! Een hele fijne dag nog en tot de volgende keer</p>
+        <p>
+            <iframe
+                    src="https://giphy.com/embed/SEMkvn3eR5tFp0nRrr"
+                    width="480"
+                    height="480"
+                    style="pointer-events: none;"
+                    frameBorder="0"
+                    class="giphy-embed"
+                    allowFullScreen>
+            </iframe>
+
+            [[Terug naar het begin|StoryMenu]]
+        </p>
+    </tw-passagedata>
+
+
+    <!-- 13 -->
+    <tw-passagedata pid="13" name="Start" tags="" position="100,100" size="100,100">
+        Hoi Bob! Ik hoop dat je een leuke laatste schoolweek van het jaar hebt gehad! Heb je goed opgelet met de breuken? Volgens mij kende je die al lang dus dat zal wel makkelijk zijn gegaan.
         Gelukkig ga ik het nu wat moeilijker voor je maken anders ben je te snel klaar.
 
         <iframe src="https://giphy.com/embed/1oKQqphQDlpb2rHUpZ" width="480" height="269" style="pointer-events: none;" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
@@ -25,31 +342,31 @@
 
         We gaan het de komende tijd hier op jouw website hebben over sleutels.
         En dan niet de sleutel waar je de deur mee op slot kan doen maar sleutels waarmee je een berichtje op slot kan doen zodat niemand het kan lezen behalve degene die de goede sleutel heeft om het berichtje weer open te maken.
-        
+
         Als ik je heb geleerd hoe je zo'n sleutel maakt dan ga ik een berichtje voor je "versleutelen" zodat alleen jij hem met de goede sleutel weer kan openen. Alsof we spionnen zijn!
-        
+
         Ben je er klaar voor?
 
         * [[Ja, laten we beginnen!|SleutelsMaken]]
     </tw-passagedata>
 
-    <!-- Passage 2: SleutelsMaken -->
-    <tw-passagedata pid="2" name="SleutelsMaken" tags="" position="300,100" size="100,100">
+    <!-- 14 -->
+    <tw-passagedata pid="14" name="SleutelsMaken" tags="" position="300,100" size="100,100">
         Oke daar gaan we!
         We gaan samen een aantal stappen doorlopen om uiteindelijk twee sleutels te maken. De ene sleutel noemen we een publieke sleutel, en de andere sleutel noemen we de prive sleutel. Als ik je heb geleerd hoe je deze sleutel maakt dan moet je mij de publieke sleutel sturen zodat ik een berichtje (waar iets leuks in zit) kan versleutelen en als je dit berichtje wilt lezen kun je dat doen door het versleutelde bericht met jouw prive sleutel te openen.
 
 
 
         <iframe src="https://giphy.com/embed/9w475hDWEPVlu" width="350" height="350" style="pointer-events: none;" frameBorder="0"  class="giphy-embed" allowFullScreen></iframe><p></p>
-        
+
         Om deze sleutels aan te maken moeten we eerst een paar dingen leren.
         Om te beginnen gaan we het hebben over priemgetallen. Weet jij wat dat zijn?
-        
+
         * [[Door naar priemgetallen|PriemGetallen]]
     </tw-passagedata>
 
-    <tw-passagedata pid="3" name="PriemGetallen" tags="" position="500,100" size="100,100">
-
+    <!-- 15 -->
+    <tw-passagedata pid="15" name="PriemGetallen" tags="" position="500,100" size="100,100">
         Een **priemgetal** is een speciaal getal dat alleen kan worden gedeeld door **1** en door **zichzelf**.
         Dat betekent dat als je het getal deelt door een ander getal dan zichzelf of door 1 dat je dan altijd een restje overhoudt.
 
@@ -70,8 +387,8 @@
         * [[Nee, ik wil meer uitleg.|MeerUitleg]]
     </tw-passagedata>
 
-    <!-- Passage 3: MeerUitleg -->
-    <tw-passagedata pid="3" name="MeerUitleg" tags="" position="500,100" size="100,100">
+    <!-- 16 -->
+    <tw-passagedata pid="16" name="MeerUitleg" tags="" position="500,100" size="100,100">
         Natuurlijk! Laten we het nog eens proberen.
 
         **Delen betekent:** Als je een getal kunt opsplitsen in kleinere getallen zonder restjes. Bijvoorbeeld:
@@ -91,8 +408,8 @@
         * [[Nee, ik ben klaar.|Samenvatting]]
     </tw-passagedata>
 
-    <!-- Passage 4: Oefening1 -->
-    <tw-passagedata pid="4" name="Oefening1" tags="" position="700,100" size="100,100">
+    <!-- 17 -->
+    <tw-passagedata pid="17" name="Oefening1" tags="" position="700,100" size="100,100">
         **Oefening 1:** Is het getal **5** een priemgetal?
 
         <iframe src="https://giphy.com/embed/Q5imCx8O3fOF1HihfR" width="480" height="480" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
@@ -101,8 +418,8 @@
         * [[Nee|FeedbackOefening1Nee]]
     </tw-passagedata>
 
-    <!-- Passage 5: FeedbackOefening1Ja -->
-    <tw-passagedata pid="5" name="FeedbackOefening1Ja" tags="" position="900,100" size="100,100">
+    <!-- 18 -->
+    <tw-passagedata pid="18" name="FeedbackOefening1Ja" tags="" position="900,100" size="100,100">
         **Goed gedaan!** 5 is inderdaad een priemgetal. Je kunt 5 alleen verdelen in 1 groep van 5 of 5 groepen van 1. Perfect!
 
         Nog een oefening proberen?
@@ -110,8 +427,8 @@
         * [[Ja, ga verder!|Oefening2]]
     </tw-passagedata>
 
-    <!-- Passage 6: FeedbackOefening1Nee -->
-    <tw-passagedata pid="6" name="FeedbackOefening1Nee" tags="" position="900,200" size="100,100">
+    <!-- 19 -->
+    <tw-passagedata pid="19" name="FeedbackOefening1Nee" tags="" position="900,200" size="100,100">
         **Bijna!** 5 is een priemgetal omdat je het alleen kunt verdelen in 1 groep van 5 of 5 groepen van 1. Probeer het nog eens!
 
         Wil je het opnieuw proberen?
@@ -120,8 +437,8 @@
         * [[Ga verder|Oefening2]]
     </tw-passagedata>
 
-    <!-- Passage 7: Oefening2 -->
-    <tw-passagedata pid="7" name="Oefening2" tags="" position="1100,100" size="100,100">
+    <!-- 20 -->
+    <tw-passagedata pid="20" name="Oefening2" tags="" position="1100,100" size="100,100">
         **Oefening 2:** Is het getal **8** een priemgetal?
 
         <iframe src="https://giphy.com/embed/B6bnealXUbW18QjPCd" width="480" height="480" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
@@ -131,31 +448,31 @@
         * [[Ja|FeedbackOefening2Ja]]
     </tw-passagedata>
 
-    <!-- Passage 8: FeedbackOefening2Ja -->
-    <tw-passagedata pid="8" name="FeedbackOefening2Nee" tags="" position="1300,100" size="100,100">
-        **Inderdaad!** 8 is geen priemgetal omdat je het kunt delen door meerdere getallen dan alleen door zichzelf (8) en 1. Je kunt namelijk 8 gedeelte door 2 doen en ook 8 gedeelte door 4.
+    <!-- 21 -->
+    <tw-passagedata pid="21" name="FeedbackOefening2Nee" tags="" position="1300,100" size="100,100">
+        **Inderdaad!** 8 is geen priemgetal omdat je het kunt delen door meerdere getallen dan alleen door zichzelf (8) en 1. Je kunt namelijk 8 gede(e)lte door 2 doen en ook 8 gede(e)lte door 4.
         Wil je nog een oefening?
 
         * [[Ja, laten we doorgaan!|Oefening3]]
     </tw-passagedata>
 
-    <!-- Passage 9: FeedbackOefening2Nee -->
-    <tw-passagedata pid="9" name="FeedbackOefening2Ja" tags="" position="1300,200" size="100,100">
-        **Bijna!** 8 is geen priemgetal omdat je het kunt delen door meerdere getallen dan alleen door zichzelf (8) en 1. Je kunt namelijk 8 gedeelte door 2 doen en ook 8 gedeelte door 4.
+    <!-- 22 -->
+    <tw-passagedata pid="22" name="FeedbackOefening2Ja" tags="" position="1300,200" size="100,100">
+        **Bijna!** 8 is geen priemgetal omdat je het kunt delen door meerdere getallen dan alleen door zichzelf (8) en 1. Je kunt namelijk 8 gede(e)lte door 2 doen en ook 8 gede(e)lte door 4.
 
         * [[Nog een oefening|Oefening3]]
     </tw-passagedata>
 
-    <!-- Passage 10: Oefening3 -->
-    <tw-passagedata pid="10" name="Oefening3" tags="" position="1500,100" size="100,100">
+    <!-- 23 -->
+    <tw-passagedata pid="23" name="Oefening3" tags="" position="1500,100" size="100,100">
         **Oefening 3:** Is het getal **7** een priemgetal?
 
         * [[Ja|FeedbackOefening3Ja]]
         * [[Nee|FeedbackOefening3Nee]]
     </tw-passagedata>
 
-    <!-- Passage 11: FeedbackOefening3Ja -->
-    <tw-passagedata pid="11" name="FeedbackOefening3Ja" tags="" position="1700,100" size="100,100">
+    <!-- 24 -->
+    <tw-passagedata pid="24" name="FeedbackOefening3Ja" tags="" position="1700,100" size="100,100">
         **Goed gedaan Bob!** 7 is een priemgetal omdat je het alleen kunt verdelen in 1 groep van 7 of 7 groepen van 1. Geweldig gedaan!
         Als je het dus deelt door bijvoorbeeld 2 dan heb je 2 keer 3,5 en dat betekent dus dat je er een door midden hebt moeten hakken.
 
@@ -164,24 +481,24 @@
         * [[Nog een oefening.|Oefening4]]
     </tw-passagedata>
 
-    <!-- Passage 12: FeedbackOefening3Nee -->
-    <tw-passagedata pid="12" name="FeedbackOefening3Nee" tags="" position="1700,200" size="100,100">
+    <!-- 25 -->
+    <tw-passagedata pid="25" name="FeedbackOefening3Nee" tags="" position="1700,200" size="100,100">
         **Goed geprobeerd maar helaas niet goed!** 7 is wel een priemgetal omdat je het alleen kunt verdelen in 1 groep van 7 of 7 groepen van 1.
 
         * [[Ga verder|Samenvatting]]
     </tw-passagedata>
 
-    <!-- Passage 13: Oefening4 -->
-    <tw-passagedata pid="13" name="Oefening4" tags="" position="1900,100" size="100,100">
+    <!-- 26 -->
+    <tw-passagedata pid="26" name="Oefening4" tags="" position="1900,100" size="100,100">
         **Oefening 4:** Is het getal **10** een priemgetal?
 
         * [[Ja|FeedbackOefening4Ja]]
         * [[Nee|FeedbackOefening4Nee]]
     </tw-passagedata>
 
-    <!-- Passage 14: FeedbackOefening4Ja -->
-    <tw-passagedata pid="14" name="FeedbackOefening4Ja" tags="" position="2100,100" size="100,100">
-        **Nee helaas!** 10 is geen priemgetal omdat je het alleen kan delen door zichzelf (10) door 1, maar ook door bijvoorbeeld 5 en door 2.
+    <!-- 27 -->
+    <tw-passagedata pid="27" name="FeedbackOefening4Ja" tags="" position="2100,100" size="100,100">
+        **Nee helaas!** 10 is geen priemgetal omdat je het niet alleen kan delen door zichzelf (10) en door 1, maar ook door bijvoorbeeld 5 en door 2.
 
         Wil je doorgaan naar het volgende onderwerp over **private en public keys**?
 
@@ -189,9 +506,9 @@
         * [[Nee, ik wil meer oefenen.|Oefening5]]
     </tw-passagedata>
 
-    <!-- Passage 15: FeedbackOefening4Nee -->
-    <tw-passagedata pid="15" name="FeedbackOefening4Nee" tags="" position="2100,200" size="100,100">
-        **Inderdaad!** 10 is geen priemgetal omdat je het alleen kan delen door zichzelf (10) door 1, maar ook door bijvoorbeeld 5 en door 2.
+    <!-- 28 -->
+    <tw-passagedata pid="28" name="FeedbackOefening4Nee" tags="" position="2100,200" size="100,100">
+        **Inderdaad!** 10 is geen priemgetal omdat je het niet alleen kan delen door zichzelf (10) en door 1, maar ook door bijvoorbeeld 5 en door 2.
 
         Wil je nog een oefening of gaan we door naar het volgende onderwerp?
 
@@ -199,19 +516,18 @@
         * [[Ga verder|Samenvatting]]
     </tw-passagedata>
 
-    <!-- Passage 16: Oefening5 -->
-    <tw-passagedata pid="16" name="Oefening5" tags="" position="2300,100" size="100,100">
+    <!-- 29 -->
+    <tw-passagedata pid="29" name="Oefening5" tags="" position="2300,100" size="100,100">
         **Oefening 5:** Is het getal **2** een priemgetal?
 
         <iframe src="https://giphy.com/embed/Su6sx7xA8AAK6mK9jD" width="480" height="480" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
-
 
         * [[Ja|FeedbackOefening5Ja]]
         * [[Nee|FeedbackOefening5Nee]]
     </tw-passagedata>
 
-    <!-- Passage 17: FeedbackOefening5Ja -->
-    <tw-passagedata pid="17" name="FeedbackOefening5Ja" tags="" position="2500,100" size="100,100">
+    <!-- 30 -->
+    <tw-passagedata pid="30" name="FeedbackOefening5Ja" tags="" position="2500,100" size="100,100">
         **Uitstekend!** 2 is een heel erg klein priemgetal omdat je het alleen kunt verdelen in 1 groep van 2 of 2 groepen van 1. Perfect!
 
         Volgens mij begrijp je het wel vriend!
@@ -219,8 +535,8 @@
         * [[Ga door!|Samenvatting]]
     </tw-passagedata>
 
-    <!-- Passage 18: FeedbackOefening5Nee -->
-    <tw-passagedata pid="18" name="FeedbackOefening5Nee" tags="" position="2500,200" size="100,100">
+    <!-- 31 -->
+    <tw-passagedata pid="31" name="FeedbackOefening5Nee" tags="" position="2500,200" size="100,100">
         **Helaas, dat is niet goed!** 2 is een priemgetal omdat je het alleen kunt verdelen in 1 groep van 2 of 2 groepen van 1.
 
         Wil je het nog eens proberen?
@@ -229,8 +545,8 @@
         * [[Ga verder|Samenvatting]]
     </tw-passagedata>
 
-    <!-- Passage 19: Samenvatting -->
-    <tw-passagedata pid="19" name="Samenvatting" tags="" position="2700,100" size="100,100">
+    <!-- 32 -->
+    <tw-passagedata pid="32" name="Samenvatting" tags="" position="2700,100" size="100,100">
         **Goed gedaan Bob!** Je hebt geleerd wat priemgetallen zijn en hebt verschillende oefeningen gedaan.
 
         Als je door dit plaatje scrolt zie je een hoop priemgetallen.
@@ -244,8 +560,8 @@
         * [[Ja, laten we doorgaan!|EchteOpdracht]]
     </tw-passagedata>
 
-    <!-- Passage 20: EchteOpdracht -->
-    <tw-passagedata pid="20" name="EchteOpdracht" tags="" position="2900,100" size="100,100">
+    <!-- 33 -->
+    <tw-passagedata pid="33" name="EchteOpdracht" tags="" position="2900,100" size="100,100">
         Oke daar gaan we Bob!
         Pak maar een pen en papier erbij en ga er goed voor zitten.
 
@@ -262,8 +578,8 @@
         [[Door naar de eerste simpele spionnen opdracht|spion-bob]]
     </tw-passagedata>
 
-    <!-- Passage 21: spion-bob -->
-    <tw-passagedata pid="21" name="spion-bob" tags="" position="3100,100" size="100,100">
+    <!-- 34 -->
+    <tw-passagedata pid="34" name="spion-bob" tags="" position="3100,100" size="100,100">
         **Spionnen opdracht 1:**
         **Bob, je hebt de eerste opdracht goed gedaan!**
         Ik heb je foto gezien en je hebt alle priemgetallen gevonden. Goed gedaan!
@@ -277,7 +593,6 @@
 
         12 5 11 11 5 18|2 5 26 9 7|2 15 2,|4 9 20|23 1 19|8 5 20|22 15 15 18|22 1 14 4 1 1 7.|13 15 18 7 5 14|7 1 1 14|23 5|22 5 18 4 5 18|13 5 20|8 5 20|22 15 12 7 5 14 4 5|15 14 4 5 18 4 5 5 12.
     </tw-passagedata>
-
 
 </tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
