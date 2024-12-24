@@ -41,12 +41,14 @@
         <p>
             [[Klik hier om de priemgetallen route te volgen|Start]]
             [[Klik hier voor het nieuwste onderdeel, modulo berekenen|Modulo]]
+
+            [[Klik hier om te beginnen met het echte werk|sleutel-maken]]
         </p>
 
          <p>
             <a href="pakmedan.html">Een modulo spelletje! Succes</a>
         </p>
-      
+
     </tw-passagedata>
 
 
@@ -598,6 +600,217 @@
 
         12 5 11 11 5 18|2 5 26 9 7|2 15 2,|4 9 20|23 1 19|8 5 20|22 15 15 18|22 1 14 4 1 1 7.|13 15 18 7 5 14|7 1 1 14|23 5|22 5 18 4 5 18|13 5 20|8 5 20|22 15 12 7 5 14 4 5|15 14 4 5 18 4 5 5 12.
     </tw-passagedata>
+
+    <tw-passagedata pid="35" name="sleutel-maken" tags="" position="3300,100" size="100,100">
+
+        <h1 style="color: #4CAF50; text-align: center;">🔐 Daar gaan we dan</h1>
+
+        <p>Je hebt al veel geleerd Bob, bijna genoeg om de spionnen sleutels te maken! Hieronder staat beschreven wat we allemaal moeten doen. Je hoeft het nog niet ineens te snappen want we gaan het hierna gewoon een keer proberen</p>
+
+        <ol>
+            <li>
+                <h2 style="color: #FF5722;">Stap 1: Kies Twee Priemgetallen 🧮</h2>
+                <p>We gaan twee speciale getallen kiezen die alleen deelbaar zijn door 1 en zichzelf. Deze getallen moeten groter zijn dan 3 maar kleiner dan 40.</p>
+            </li>
+
+            <li>
+                <h2 style="color: #FF5722;">Stap 2: Bereken het Modulo 🔢</h2>
+                <p>Met de twee priemgetallen die we hebben gekozen, gaan we een nieuw getal berekenen door ze met elkaar te vermenigvuldigen. Dit getal noemen we het <em>modulo getal</em>.</p>
+            </li>
+
+            <li>
+                <h2 style="color: #FF5722;">Stap 3: Bereken het Euler Getal (φ(n)) 🌟</h2>
+                <p>Naast het modulo getal, berekenen we ook een ander speciaal getal dat het Euler getal wordt genoemd. Dit getal is heel belangrijk voor het maken van onze sleutels.</p>
+            </li>
+
+            <li>
+                <h2 style="color: #FF5722;">Stap 4: Kies een Publieke Sleutel 🅰️</h2>
+                <p>We gaan een publiek getal kiezen dat voldoet aan bepaalde voorwaarden. Dit getal mag geen gemeenschappelijke delers hebben met het Euler getal, behalve 1. Dit getal wordt onze <strong>publieke sleutel</strong> die iedereen kan zien.</p>
+            </li>
+
+            <li>
+                <h2 style="color: #FF5722;">Stap 5: Maak de Private Sleutel 🔒</h2>
+                <p>Met behulp van het Euler getal en een speciale rekenmethode gaan we nu een geheim getal maken. Dit wordt onze <strong>private sleutel</strong> die alleen jij mag kennen.</p>
+            </li>
+        </ol>
+
+        <p>🎉 **Klaar om te beginnen?** We gaan stap voor stap werken om onze eigen veilige sleutels te maken. Eerst kiezen we de juiste getallen en dan maken we onze publieke en prive sleutels!</p>
+
+        [[Laten we beginnen!|sleutel-stap1]]
+    </tw-passagedata>
+    <tw-passagedata pid="36" name="sleutel-stap1" tags="" position="3500,100" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🔐 Stap 1: Kies Twee Priemgetallen 🧮</h1>
+
+        <p>We gaan nu twee speciale getallen kiezen die <strong>groter zijn dan 3</strong> en <strong>kleiner dan 40</strong>. Deze getallen noemen we <em>priemgetallen</em>.</p>
+
+        <p>We kiezen bijvoorbeeld: <strong>7 en 11</strong>. Deze getallen zijn allebei priemgetallen en allebei groter dan 3 en kleiner dan 40.</p>
+
+        <!-- Link naar de volgende stap -->
+        [[Ga verder naar Stap 2|sleutel-stap2]]
+    </tw-passagedata>
+
+    <tw-passagedata pid="37" name="sleutel-stap2" tags="" position="3700,200" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🔢 Stap 2: Bereken het Modulo getal</h1>
+
+        <p>We hebben gekozen voor de priemgetallen <strong>7</strong> en <strong>11</strong>.</p>
+
+        <p>Nu vermenigvuldigen we deze twee priemgetallen om het <em>modulo getal </em> te berekenen:</p>
+
+        <p><strong>Berekening:</strong> 7 * 11 = <span style="color: #2196F3;">77</span></p>
+
+        <p>Dus, <strong>modulo getal = 77. </strong> Dit getal gaan we straks gebruiken voor het versleutelen en ontsleutelen van berichten.</p>
+
+        [[Ga verder naar Stap 3|sleutel-stap3]]
+    </tw-passagedata>
+
+    <tw-passagedata pid="38" name="sleutel-stap3" tags="" position="3900,300" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🌟 Stap 3: Bereken het Euler Getal.</h1>
+
+        <p>Geweldig! We hebben onze priemgetallen <strong>7</strong> en <strong>11</strong> gekozen en het <em>modulo getal</em> berekend als <strong>77</strong>.</p>
+
+        <h2 style="color: #FF5722;">🔍 Wat is het Euler Getal?</h2>
+        <p>Het Euler getal, geschreven als <strong>φ(n)</strong>, is een speciaal getal dat we nodig hebben om onze geheime sleutel te maken. Het helpt ons later om de sleutel veilig te houden.</p>
+
+        <h2 style="color: #FF5722;">🧮 Hoe bereken Je het Euler getal?</h2>
+        <p>We gebruiken de volgende formule om het Euler getal te berekenen:</p>
+        <p style="font-size: 1.2em;"><strong>Euler getal = (priemgetal1 - 1) × (priemgetal2 - 1)</strong>. Ik weet niet of je ooit met haakjes hebt gewerkt, maar het is belangrijk om eerst op te lossen wat er tussen de haakjes staat. En daarna kunnen de haakjes weg en los je de rest van de som op. Hieronder doen we het samen</p>
+
+
+        <h3 style="color: #FF5722;">📐 Toepassing op Onze Getallen</h3>
+        <p>In ons geval:</p>
+        <p style="font-size: 1.2em;"><strong>Euler getal = (7 - 1) × (11 - 1)</strong></p>
+        <p style="font-size: 1.2em;"><strong>Euler getal = 6 × 10 = 60</strong></p>
+
+        <p>Dus, <strong>Euler getal = 60</strong></p>
+
+        <!-- GIF voor visuele ondersteuning -->
+        <iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+
+        <p>🎉 **Fantastisch!** We hebben nu twee belangrijke getallen: <strong>modul getal= 77</strong> en <strong>Euler getal = 60</strong>.</p>
+
+        <!-- Link naar de volgende stap -->
+        [[Ga verder naar Stap 4|sleutel-stap4]]
+    </tw-passagedata>
+
+    <tw-passagedata pid="39" name="sleutel-stap4" tags="" position="4100,400" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🅰️ Stap 4: Kies een Publieke Sleutel</h1>
+
+        <p>Nu dat we het <strong>modulo getal = 77</strong> en het <strong>Euler getal = 60</strong> hebben, gaan we een speciaal getal kiezen dat onze <em>publieke sleutel</em> wordt.</p>
+
+
+        <h2 style="color: #FF5722;">🔍 Wat is een Publieke Sleutel?</h2>
+        <p>Een publieke sleutel is een getal dat iedereen kan zien en gebruiken om berichten te versleuteld te verzenden. Maar het moet aan een paar belangrijke voorwaarden voldoen:</p>
+
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li>Het moet kleiner zijn dan het Euler getal.</li>
+            <li>Het mag geen gemeenschappelijke delers hebben met het Euler getal, behalve 1.</li>
+        </ul>
+
+        <p>Voor ons kiezen we bijvoorbeeld <strong>publieke sleutel = 7</strong>.</p>
+
+        <p>Even samen controleren of <strong>7</strong> voldoet aan de belangrijke voorwaarden:</p>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li><strong>7</strong> is kleiner dan <strong>24</strong>.</li>
+            <li>De grootste gemeenschappelijke deler van <strong>7</strong> en <strong>60</strong> is <strong>1</strong>. </li>
+        </ul>
+
+        <p>Omdat <strong>7</strong> aan beide voorwaarden voldoet, is dit een goede keuze voor onze publieke sleutel.</p>
+
+        <!-- GIF voor visuele ondersteuning -->
+        <iframe src="https://giphy.com/embed/l0MYt5jPR6QX5pnqM" width="480" height="270" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+
+        <p>🎉 **Fantastisch!** We hebben nu onze publieke sleutel: <strong>7</strong>.</p>
+
+        <!-- Link naar de volgende stap -->
+        [[Ga verder naar Stap 5|sleutel-stap5]]
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="39" name="sleutel-stap5" tags="" position="4300,500" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🔒 Stap 5: Bereken de Prive Sleutel</h1>
+
+        <p>Super! We hebben onze <strong>publieke sleutel</strong> en het <strong>Euler getal</strong>.</p>
+
+        <h2 style="color: #FF5722;">🧩 Wat is de Prive Sleutel?</h2>
+        <p>De <strong>prive sleutel</strong> is een geheim getal dat alleen jij mag weten. Hiermee kun je berichten ontcijferen die met de publieke sleutel zijn versleuteld.</p>
+
+        <h2 style="color: #FF5722;">🧮 Hoe Bereken Je de Prive Sleutel?</h2>
+        <p>We moeten een getal <strong>(prive sleutel)</strong> vinden zodat wanneer we dit getal vermenigvuldigen met onze publieke sleutel en modulo het Euler getal doen, de rest 1 is.</p>
+
+        <p>De formule is misschien wat ingewikkeld maar hij ziet er zo uit:</p>
+        <p style="font-size: 1.2em;"><strong>(Prive Sleutel × Publieke Sleutel) modulo Euler getal = 1 </strong>
+        </p>
+
+        <h3 style="color: #FF5722;">📐 Toepassing op Onze Getallen</h3>
+        <p>We hebben:</p>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li><strong>Publieke Sleutel = 7</strong></li>
+            <li><strong>Euler getal = 60</strong></li>
+        </ul>
+
+        <p>We zoeken dus een getal <strong>(private sleutel)</strong> zodat:</p>
+        <p style="font-size: 1.2em;"><strong>(Prive Sleutel × 7 ) modulo 60 = 1</strong>
+        Deze formule moeten we gaan oplossen zodat we uiteindelijk een prive sleutel hebben dat wanneer we deze keer de publieke sleutel doen en dan modulo het Euler getal dat we 1 over houden. Misschien dat dat een beetje ingewikkeld klinkt maar we gaan het samen doen. </p>
+
+        <h3 style="color: #FF5722;">🔍 Hoe Vinden We de Prive Sleutel?</h3>
+        <p>Laten we verschillende waarden voor de <strong>prive sleutel</strong> proberen totdat we de juiste vinden:</p>
+
+        <ul style="list-style-type: none; padding-left: 0;">
+            <li><strong>Prive Sleutel = 1:</strong> 1 × 7 = 7 → 7 mod 60 = 7 (niet 1)</li>
+            <li><strong>Prive Sleutel = 2:</strong> 2 × 7 = 14 → 14 mod 60 = 14 (niet 1)</li>
+            <li><strong>Prive Sleutel = 5:</strong> 5 × 7 = 35 → 35 mod 60 = 35 (niet 1)</li>
+            <li><strong>Prive Sleutel = 7:</strong> 7 × 7 = 49 → 49 mod 60 = 49 (niet 1)</li>
+            <li><strong>Prive Sleutel = 17:</strong> 17 × 7 = 119 → 119 mod 60 = 59 (niet 1)</li>
+            <l><strong>Pfoeee dit duuurt wel lang he zo? Ik zal hem maar gewoon vertellen hieronder :D</strong></l>
+            <li><strong>Prive Sleutel = 43:</strong> 43 × 7 = 301 → 301 mod 60 = 1 (juist!)</li>
+        </ul>
+
+        <p>Dus, <strong>Prive Sleutel = 43</strong> voldoet aan de voorwaarde!</p>
+
+        <h2 style="color: #FF5722;">🔑 Jouw Private Sleutel</h2>
+        <p>Nu weten we dat:</p>
+        <ul style="list-style-type: disc; padding-left: 20px;">
+            <li><strong>Prive Sleutel = 43</strong></li>
+            <li><strong>Modulo getal = 77</strong></li>
+        </ul>
+
+        <p>🎉 **Fantastisch!** We hebben nu zowel onze <strong>publieke sleutel</strong> <strong>7</strong> als onze <strong>prive sleutel</strong> <strong>43</strong>.</p>
+
+        <!-- Link naar de volgende stap -->
+        [[Ga verder naar Stap 6|sleutel-stap6]]
+    </tw-passagedata>
+
+
+    <tw-passagedata pid="40" name="sleutel-stap6" tags="" position="4500,600" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">📬 Stap 6: Gebruik Je Sleutels!</h1>
+
+        <p>Geweldig! We hebben nu onze <strong>publieke sleutel</strong> en <strong>prive sleutel</strong>.</p>
+
+        <h2 style="color: #FF5722;">🔐 Hoe Werken Ze Samen?</h2>
+        <p>Onze sleutels werken samen om berichten veilig te houden. Hier is hoe het werkt:</p>
+
+        <h3 style="color: #FF5722;">✉️ Versleutelen van een Bericht</h3>
+        <p>Als iemand een bericht wil sturen, gebruiken ze onze publieke sleutel <strong>(5, 35)</strong> om het bericht te versleutelen.</p>
+        <p>Stel dat het bericht het getal <strong>3</strong> is:</p>
+        <p style="font-size: 1.2em;"><strong>3<sup>5</sup> mod 35 = 243 mod 35 = 243 - (35 × 6) = 243 - 210 = 33</strong></p>
+        <p>Dus, het versleutelde bericht is <strong>33</strong>.</p>
+
+        <h3 style="color: #FF5722;">🔓 Ontsleutelen van een Bericht</h3>
+        <p>Om het bericht te ontcijferen, gebruiken we onze private sleutel <strong>(5, 35)</strong>:</p>
+        <p style="font-size: 1.2em;"><strong>33<sup>5</sup> mod 35 = 39135393 mod 35 = 3</strong></p>
+        <p>Dus, het originele bericht <strong>3</strong> wordt teruggehaald!</p>
+
+        <!-- GIF voor visuele ondersteuning -->
+        <iframe src="https://giphy.com/embed/3o7TKz9bZxwYzvSjAs" width="480" height="480" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+
+        <p>🎉 **Hoera!** Je hebt nu geleerd hoe je berichten veilig kunt versturen en ontvangen met behulp van jouw sleutels.</p>
+
+        <!-- Link naar de afsluiting of herhaling -->
+        [[Klaar!|afsluiting]]
+    </tw-passagedata>
+
+
+
 
 </tw-storydata>
 <script title="Twine engine code" data-main="harlowe">(function(){"use strict";
