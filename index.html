@@ -629,8 +629,8 @@
             </li>
 
             <li>
-                <h2 style="color: #FF5722;">Stap 5: Maak de Private Sleutel 🔒</h2>
-                <p>Met behulp van het Euler getal en een speciale rekenmethode gaan we nu een geheim getal maken. Dit wordt onze <strong>private sleutel</strong> die alleen jij mag kennen.</p>
+                <h2 style="color: #FF5722;">Stap 5: Maak de Prive Sleutel 🔒</h2>
+                <p>Met behulp van het Euler getal en een speciale rekenmethode gaan we nu een geheim getal maken. Dit wordt onze <strong>prive sleutel</strong> die alleen jij mag kennen.</p>
             </li>
         </ol>
 
@@ -748,7 +748,7 @@
             <li><strong>Euler getal = 60</strong></li>
         </ul>
 
-        <p>We zoeken dus een getal <strong>(private sleutel)</strong> zodat:</p>
+        <p>We zoeken dus een getal <strong>(prive sleutel)</strong> zodat:</p>
         <p style="font-size: 1.2em;"><strong>(Prive Sleutel × 7 ) modulo 60 = 1</strong>
         Deze formule moeten we gaan oplossen zodat we uiteindelijk een prive sleutel hebben dat wanneer we deze keer de publieke sleutel doen en dan modulo het Euler getal dat we 1 over houden. Misschien dat dat een beetje ingewikkeld klinkt maar we gaan het samen doen. </p>
 
@@ -767,7 +767,7 @@
 
         <p>Dus, <strong>Prive Sleutel = 43</strong> voldoet aan de voorwaarde!</p>
 
-        <h2 style="color: #FF5722;">🔑 Jouw Private Sleutel</h2>
+        <h2 style="color: #FF5722;">🔑 Jouw Prive Sleutel</h2>
         <p>Nu weten we dat:</p>
         <ul style="list-style-type: disc; padding-left: 20px;">
             <li><strong>Prive Sleutel = 43</strong></li>
@@ -788,20 +788,20 @@
     <tw-passagedata pid="40" name="sleutel-stap6" tags="" position="4500,600" size="100,100">
         <h1 style="color: #4CAF50; text-align: center;">📬 Stap 6: Gebruik Je Sleutels!</h1>
 
-        <p>Geweldig! We hebben nu onze <strong>publieke sleutel</strong> en <strong>prive sleutel</strong>.</p>
+        <p>Geweldig! We hebben nu onze <strong>publieke sleutel</strong> <strong>(7, 77)</strong> en <strong>prive sleutel</strong> <strong>(43, 77)</strong>.</p>
 
         <h2 style="color: #FF5722;">🔐 Hoe Werken Ze Samen?</h2>
         <p>Onze sleutels werken samen om berichten veilig te houden. Hier is hoe het werkt:</p>
 
         <h3 style="color: #FF5722;">✉️ Versleutelen van een Bericht</h3>
-        <p>Als iemand een bericht wil sturen, gebruiken ze onze publieke sleutel <strong>(5, 35)</strong> om het bericht te versleutelen.</p>
+        <p>Als iemand een bericht wil sturen, gebruiken ze onze publieke sleutel <strong>(7, 77)</strong> om het bericht te versleutelen.</p>
         <p>Stel dat het bericht het getal <strong>3</strong> is:</p>
-        <p style="font-size: 1.2em;"><strong>3<sup>5</sup> mod 35 = 243 mod 35 = 243 - (35 × 6) = 243 - 210 = 33</strong></p>
-        <p>Dus, het versleutelde bericht is <strong>33</strong>.</p>
+        <p style="font-size: 1.2em;"><strong>3<sup>7</sup> mod 77 = 2187 mod 77 = 31</strong></p>
+        <p>Dus, het versleutelde bericht is <strong>31</strong>.</p>
 
         <h3 style="color: #FF5722;">🔓 Ontsleutelen van een Bericht</h3>
-        <p>Om het bericht te ontcijferen, gebruiken we onze private sleutel <strong>(5, 35)</strong>:</p>
-        <p style="font-size: 1.2em;"><strong>33<sup>5</sup> mod 35 = 39135393 mod 35 = 3</strong></p>
+        <p>Om het bericht te ontcijferen, gebruiken we onze prive sleutel <strong>(43, 77)</strong>:</p>
+        <p style="font-size: 1.2em;"><strong>31<sup>43</sup> mod 77 = 3</strong></p>
         <p>Dus, het originele bericht <strong>3</strong> wordt teruggehaald!</p>
 
         <!-- GIF voor visuele ondersteuning -->
@@ -812,6 +812,7 @@
         <!-- Link naar de afsluiting of herhaling -->
         [[Klaar!|afsluiting]]
     </tw-passagedata>
+
 
 
 
