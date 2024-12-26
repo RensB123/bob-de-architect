@@ -43,6 +43,8 @@
             [[Klik hier voor het nieuwste onderdeel, modulo berekenen|Modulo]]
 
             [[Klik hier om te beginnen met het echte werk|sleutel-maken]]
+
+            [[Je hebt je sleutels gemaakt, laten we gaan versleutelen|versleutelen]]
         </p>
 
          <p>
@@ -778,8 +780,7 @@
         </p>
 
 
-        <p>Zo Bob, dat was het voor vandaag. Dit was nog wat lastiger dan gedacht, ik denk van 1 tot 10 toch wel misschien een 7?
-        We gaan het er later verder over hebben zodat het allemaal duidelijker wordt. En dan gaan we daarna bekijken hoe we de sleutels kunnen gebruiken. Als je dit dadelijk begrijpt dan ben ik wel heel erg trots! Een hele fijne kerstavond, lekker eten en drinken en tot de volgende keer. Groetjes van Rens</p>
+        [[Ga verder naar stap 6|sleutel-stap6]]
         <!-- Link naar de volgende stap -->
 
     </tw-passagedata>
@@ -788,29 +789,37 @@
     <tw-passagedata pid="40" name="sleutel-stap6" tags="" position="4500,600" size="100,100">
         <h1 style="color: #4CAF50; text-align: center;">📬 Stap 6: Gebruik Je Sleutels!</h1>
 
-        <p>Geweldig! We hebben nu onze <strong>publieke sleutel</strong> <strong>(7, 77)</strong> en <strong>prive sleutel</strong> <strong>(43, 77)</strong>.</p>
+        <p>Geweldig! We hebben nu onze <strong>publieke sleutel</strong> <strong>7</strong> en <strong>prive sleutel</strong> <strong>43</strong>. Daarnaast hebben we ook ons modulo getal nog, die was <strong>77</strong>.</p>
 
         <h2 style="color: #FF5722;">🔐 Hoe Werken Ze Samen?</h2>
         <p>Onze sleutels werken samen om berichten veilig te houden. Hier is hoe het werkt:</p>
 
         <h3 style="color: #FF5722;">✉️ Versleutelen van een Bericht</h3>
-        <p>Als iemand een bericht wil sturen, gebruiken ze onze publieke sleutel <strong>(7, 77)</strong> om het bericht te versleutelen.</p>
+        <p>Als iemand een bericht wil sturen, gebruiken ze onze publieke sleutel <strong>7</strong> samen met het modulo getal <strong>77</strong> om het bericht te versleutelen.</p>
+
+        <p>Het sommetje om het bericht te versleutelen is de volgende:
+        <strong>(bericht dat je wilt versleutelen) tot de macht van de publieke sleutel en de uitkomst hiervan modulo het modulo getal.</strong>
+            Dat ziet er dan zo uit:
+            bericht<sup>publieke sleutel</sup> % modulo getal</p>
+
         <p>Stel dat het bericht het getal <strong>3</strong> is:</p>
-        <p style="font-size: 1.2em;"><strong>3<sup>7</sup> mod 77 = 2187 mod 77 = 31</strong></p>
+        <p style="font-size: 1.2em;"><strong>3<sup>7</sup> modulo 77 =>
+            2187 modulo 77 = 31</strong></p>
         <p>Dus, het versleutelde bericht is <strong>31</strong>.</p>
 
         <h3 style="color: #FF5722;">🔓 Ontsleutelen van een Bericht</h3>
-        <p>Om het bericht te ontcijferen, gebruiken we onze prive sleutel <strong>(43, 77)</strong>:</p>
-        <p style="font-size: 1.2em;"><strong>31<sup>43</sup> mod 77 = 3</strong></p>
+        <p>Om het bericht te ontcijferen, gebruiken we onze prive sleutel <strong>43</strong> samen met het modulo getal <strong>77.</strong>
+        Hierbij pakken we het versleutelde bericht (dat was 31). En we doen die tot de macht prive sleutel. Daar pakken we dan weer de modulo van het modulo getal van en als het goed is blijft dan het orginele getal weer over. Kun je hem nog volgen? Misschien is dit toch wel al wel 8 moeilijk, of niet? Hier zie je het sommetje:</p>
+
+        <p style="font-size: 1.2em;"><strong>31<sup>43</sup> modulo 77 = 3</strong></p>
         <p>Dus, het originele bericht <strong>3</strong> wordt teruggehaald!</p>
 
-        <!-- GIF voor visuele ondersteuning -->
-        <iframe src="https://giphy.com/embed/3o7TKz9bZxwYzvSjAs" width="480" height="480" style="pointer-events: none" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p></p>
+        <p>We hebben alleen wel een probleem hier.. Want dit sommetje is echt veel te groot om te maken. 31 tot de macht 43 is namelijk 31 x 31 x 31 x 31 en dat nog heel erg vaak. Zelfs rekenmachines kunnen dit niet aan. Dus hier gaan we heel snel een klein trucje voor leren. Dus je weet nu ongeveer hoe het werkt maar we moeten dus nog 1 laatste ding leren voordat we echt aan de slag kunnen. Dit gaan we snel doen! </p>
 
-        <p>🎉 **Hoera!** Je hebt nu geleerd hoe je berichten veilig kunt versturen en ontvangen met behulp van jouw sleutels.</p>
 
-        <!-- Link naar de afsluiting of herhaling -->
-        [[Klaar!|afsluiting]]
+
+<!--        <p>🎉 **Hoera!** Je hebt nu geleerd hoe je berichten veilig kunt versturen en ontvangen met behulp van jouw sleutels.</p>-->
+
     </tw-passagedata>
 
 
