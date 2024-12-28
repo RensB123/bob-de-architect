@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile-first -->
     <title>Modulair Vermenigvuldigen</title>
     <style>
         body {
@@ -10,34 +11,44 @@
             color: #333;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
         h1, h2, h3 {
             color: #FF5722;
+            margin-bottom: 10px;
         }
-        .step {
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .step, .final-result {
             background-color: #FFF3E0;
             border: 2px solid #FFCCBC;
             border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
             text-align: left;
+            box-sizing: border-box;
         }
         .step h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
         .step input[type="number"] {
             padding: 10px;
             font-size: 16px;
-            width: 60%;
+            width: 100%;
             border: 2px solid #FFAB91;
             border-radius: 5px;
             margin-top: 10px;
+            box-sizing: border-box;
         }
         .step button {
-            padding: 10px 20px;
+            padding: 12px;
             font-size: 16px;
             background-color: #FF7043;
             color: white;
@@ -45,6 +56,8 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .step button:hover {
             background-color: #FF5722;
@@ -66,19 +79,20 @@
             border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
             font-size: 20px;
             color: #2E7D32;
+            box-sizing: border-box;
         }
         .header-image {
-            width: 150px;
+            width: 100px;
             height: auto;
             margin-bottom: 20px;
         }
         .reset-button {
-            padding: 10px 20px;
+            padding: 12px;
             font-size: 16px;
             background-color: #607D8B;
             color: white;
@@ -86,9 +100,21 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .reset-button:hover {
             background-color: #455A64;
+        }
+        /* Media Queries voor Grotere Schermen */
+        @media (min-width: 601px) {
+            .step input[type="number"] {
+                width: 60%;
+            }
+            .step button, .reset-button {
+                width: auto;
+                max-width: 200px;
+            }
         }
     </style>
 </head>
@@ -118,7 +144,7 @@
 
 <div class="final-result" id="final-result" style="display: none;">
     🎉 <strong>Gefeliciteerd!</strong> Je hebt alle stappen voltooid. <br>
-    <strong>2<sup>10</sup> mod 17 = 4</strong>
+    <strong id="final-result-text"></strong>
     <br>
     <button class="reset-button" onclick="resetExercise()">Oefening Opnieuw Starten</button>
 </div>
@@ -162,7 +188,7 @@
             prevAnswer.innerHTML = `<strong>Vorig Antwoord:</strong> <span id="prev${stepNumber}">${previousResult}</span>`;
             stepDiv.appendChild(prevAnswer);
         } else {
-            prevAnswer.innerHTML = `Voor de eerste stap hebben we nog geen antwoord van het vorige sommetje dus dan mag je het basis getal keer 1 doen en daar de modulo van pakken.`;
+            prevAnswer.innerHTML = `Voor de eerste stap hebben we nog geen antwoord van het vorige sommetje dus dan mag je het basisgetal keer 1 doen en daar de modulo van pakken.`;
             stepDiv.appendChild(prevAnswer);
         }
 
@@ -216,6 +242,7 @@
             } else {
                 // Toon het eindresultaat
                 document.getElementById('final-result').style.display = 'block';
+                document.getElementById('final-result-text').innerHTML = `<strong>${base}<sup>${exponent}</sup> mod ${modulo} = ${result}</strong>`;
             }
         } else {
             feedback.innerHTML = '❌ Oeps! Probeer het opnieuw.';
