@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Modulair Vermenigvuldigen</title>
+    <style>
+        body {
+            background-color: #F0F8FF;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #FF5722;
+        }
+        .step {
+            background-color: #FFF3E0;
+            border: 2px solid #FFCCBC;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            text-align: left;
+            position: relative;
+        }
+        .step h2 {
+            text-align: center;
+        }
+        .step .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .step .header .exponent {
+            font-size: 24px;
+            margin-left: 10px;
+            position: relative;
+        }
+        .step .header .exponent::after {
+            content: '→ Deze mag je negeren';
+            font-size: 14px;
+            color: #555;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 2px 5px;
+            border-radius: 3px;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .step .formula {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .step .input-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        .step .input-section input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100px;
+            border: 2px solid #FFAB91;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .step .input-section span {
+            font-size: 18px;
+            margin: 0 10px;
+        }
+        .step button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .step button:hover {
+            background-color: #FF5722;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .final-result {
+            background-color: #E8F5E9;
+            border: 2px solid #A5D6A7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            font-size: 20px;
+            color: #2E7D32;
+        }
+        .header-image {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .reset-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .reset-button:hover {
+            background-color: #455A64;
+        }
+        /* Style voor de invoervelden sectie */
+        .input-section-top {
+            background-color: #FFF3E0;
+            border: 2px solid #FFCCBC;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .input-section-top h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-section-top label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .input-section-top input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid #FFAB91;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .input-section-top button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .input-section-top button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🔑 Modulair Vermenigvuldigen Leren</h1>
+<img src="https://i.imgur.com/5c7J6QH.png" alt="Leer Modulaire Vermenigvuldigen" class="header-image">
+
+<p>Welkom! Vandaag gaan we leren hoe je <strong>modulair vermenigvuldigen</strong> kunt gebruiken om grote getallen klein te houden. Dit maakt rekenen makkelijker en sneller! 🚀</p>
+
+<!-- Invoervelden voor Basis, Macht en Modulo -->
+<div class="input-section-top" id="input-section-top">
+    <h2>Start de Oefening</h2>
+    <label for="base-input">Basisgetal:</label>
+    <input type="number" id="base-input" placeholder="Voer het basisgetal in" min="1">
+
+    <label for="exponent-input">Machtgetal (Aantal Stappen):</label>
+    <input type="number" id="exponent-input" placeholder="Voer het machtgetal in" min="1">
+
+    <label for="modulo-input">Modulo:</label>
+    <input type="number" id="modulo-input" placeholder="Voer het modulo-getal in" min="1">
+
+    <button onclick="startExercise()">Start</button>
+</div>
+
+<!-- Uitleg van de Begrippen (blijft zichtbaar) -->
+<div class="step" id="step0">
+    <h2>Stap 1: Begrijp de Begrippen</h2>
+    <p><strong>Basisgetal (Grondgetal):</strong> Dit is het getal dat je telkens vermenigvuldigt.</p>
+    <p><strong>Exponent:</strong> Dit is hoe vaak je het basisgetal vermenigvuldigt. Dit bepaalt het aantal stappen.</p>
+    <p><strong>Modulo:</strong> Dit is het getal waar je door deelt om te zien hoeveel er overblijven.</p>
+    <h3>🔍 Voorbeeld: Begrijp <span style="font-family: monospace;">2<sup>10</sup> mod 17</span></h3>
+    <p>We willen weten wat <span style="font-family: monospace;">2<sup>10</sup> mod 17</span> is. Dit betekent dat we 2 tien keer met zichzelf vermenigvuldigen en na elke vermenigvuldiging de rest berekenen als we door 17 delen.</p>
+    <p>Bijvoorbeeld:</p>
+    <p style="font-family: monospace;">2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1024</p>
+    <p>En 1024 mod 17 = 4 (60 × 17 = 1020 dus er blijft 4 over).</p>
+    <p>Dus, <strong>2<sup>10</sup> mod 17 = 4</strong>.</p>
+    <p>Let op: We gebruiken de exponenten om bij te houden hoeveel keer we vermenigvuldigen, maar we berekenen de machten niet direct. In plaats daarvan vermenigvuldigen we telkens het basisgetal met het resultaat van de vorige stap en nemen we de modulo.</p>
+</div>
+
+<div id="steps-container">
+    <!-- Interactieve stappen komen hier -->
+</div>
+
+<div class="final-result" id="final-result" style="display: none;">
+    🎉 <strong>Gefeliciteerd!</strong> Je hebt alle stappen voltooid. <br>
+    <strong id="final-result-text"></strong>
+    <br>
+    <button class="reset-button" onclick="resetExercise()">Oefening Opnieuw Starten</button>
+</div>
+
+<script>
+    let base;
+    let modulo;
+    let exponent;
+    let currentStep = 1;
+    let result = 1; // Begin met 1 voor de eerste stap
+
+    const stepsContainer = document.getElementById('steps-container');
+    const finalResult = document.getElementById('final-result');
+    const finalResultText = document.getElementById('final-result-text');
+    const inputSectionTop = document.getElementById('input-section-top');
+
+    function startExercise() {
+        // Haal de ingevoerde waarden op
+        base = parseInt(document.getElementById('base-input').value);
+        exponent = parseInt(document.getElementById('exponent-input').value);
+        modulo = parseInt(document.getElementById('modulo-input').value);
+
+        // Controleer of de invoervelden correct zijn ingevuld
+        if (isNaN(base) || base < 1 || isNaN(exponent) || exponent < 1 || isNaN(modulo) || modulo < 1) {
+            alert('Voer alstublieft geldige positieve getallen in voor basis, macht en modulo.');
+            return;
+        }
+
+        // Verberg de invoervelden sectie nadat de oefening is gestart
+        inputSectionTop.style.display = 'none';
+
+        // Begin met de eerste stap
+        createStep(currentStep, result);
+    }
+
+    function createStep(stepNumber, previousResult) {
+        // Creëer een nieuwe stap div
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step';
+        stepDiv.id = `interactive-step${stepNumber}`;
+
+        // Titel van de stap
+        const stepTitle = document.createElement('h2');
+        stepTitle.textContent = `Stap ${stepNumber}: Gebruik het Vorige Antwoord`;
+        stepDiv.appendChild(stepTitle);
+
+        // Header met basis en exponent en pijltje
+        const header = document.createElement('div');
+        header.className = 'header';
+
+        const baseElement = document.createElement('span');
+        baseElement.innerHTML = `<strong>${base}<sup>${stepNumber}</sup></strong>`;
+        header.appendChild(baseElement);
+
+        stepDiv.appendChild(header);
+
+        // Uitleg van de stap
+        const description = document.createElement('p');
+        description.textContent = 'Vermenigvuldig het antwoord van de vorige stap met het basisgetal en neem de modulo.';
+        stepDiv.appendChild(description);
+
+        // Formule van de stap
+        const formula = document.createElement('p');
+        formula.className = 'formula';
+        formula.innerHTML = `<strong>Formule:</strong> ${base}<sup>${stepNumber}</sup> mod ${modulo} = ?`;
+        stepDiv.appendChild(formula);
+
+        // Vorig antwoord tonen
+        const prevAnswer = document.createElement('p');
+        prevAnswer.innerHTML = `<strong>Vorig Antwoord:</strong> <span id="prev${stepNumber}">${previousResult}</span>`;
+        stepDiv.appendChild(prevAnswer);
+
+        // Inputsectie
+        const inputSection = document.createElement('div');
+        inputSection.className = 'input-section';
+
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.id = `answer${stepNumber}`;
+        input.placeholder = 'Jouw antwoord';
+        inputSection.appendChild(input);
+
+        const modText = document.createElement('span');
+        modText.textContent = ` mod ${modulo} = `;
+        inputSection.appendChild(modText);
+
+        const answerSpan = document.createElement('span');
+        answerSpan.id = `result${stepNumber}`;
+        inputSection.appendChild(answerSpan);
+
+        stepDiv.appendChild(inputSection);
+
+        // Check knop
+        const button = document.createElement('button');
+        button.textContent = 'Controleren';
+        button.onclick = () => checkAnswer(stepNumber);
+        stepDiv.appendChild(button);
+
+        // Feedback div
+        const feedback = document.createElement('div');
+        feedback.id = `feedback${stepNumber}`;
+        feedback.className = 'feedback';
+        stepDiv.appendChild(feedback);
+
+        // Voeg de stap toe aan de container
+        stepsContainer.appendChild(stepDiv);
+    }
+
+    function checkAnswer(step) {
+        const userAnswer = parseInt(document.getElementById(`answer${step}`).value);
+        let expected;
+
+        if (step === 1) {
+            // Eerste stap: (base * 1) mod modulo
+            expected = (base * 1) % modulo;
+        } else {
+            // Andere stappen: (result * base) mod modulo
+            expected = (result * base) % modulo;
+        }
+
+        const feedback = document.getElementById(`feedback${step}`);
+        const resultSpan = document.getElementById(`result${step}`);
+
+        if (userAnswer === expected) {
+            feedback.innerHTML = '✅ Correct!';
+            feedback.className = 'feedback correct';
+            // Toon het antwoord in de formule
+            resultSpan.textContent = userAnswer;
+
+            // Update resultaat en stap
+            result = userAnswer;
+            currentStep++;
+
+            // Maak de volgende stap als we nog stappen over hebben
+            if (currentStep <= exponent) {
+                createStep(currentStep, result);
+            } else {
+                // Toon het eindresultaat
+                finalResultText.innerHTML = `<strong>${base}<sup>${exponent}</sup> mod ${modulo} = ${result}</strong>`;
+                finalResult.style.display = 'block';
+            }
+        } else {
+            feedback.innerHTML = '❌ Oeps! Probeer het opnieuw.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
+
+    function resetExercise() {
+        location.reload();
+    }
+</script>
+
+</body>
+</html>

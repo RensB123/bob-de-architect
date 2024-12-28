@@ -816,12 +816,83 @@
 
         <p>We hebben alleen wel een probleem hier.. Want dit sommetje is echt veel te groot om te maken. 31 tot de macht 43 is namelijk 31 x 31 x 31 x 31 en dat nog heel erg vaak. Zelfs rekenmachines kunnen dit niet aan. Dus hier gaan we heel snel een klein trucje voor leren. Dus je weet nu ongeveer hoe het werkt maar we moeten dus nog 1 laatste ding leren voordat we echt aan de slag kunnen. Dit gaan we snel doen! </p>
 
-
+        [[Ik wil  graag een trucje weten om dit te doen|sleutel-stap7]]
 
 <!--        <p>🎉 **Hoera!** Je hebt nu geleerd hoe je berichten veilig kunt versturen en ontvangen met behulp van jouw sleutels.</p>-->
 
     </tw-passagedata>
 
+    <tw-passagedata pid="41" name="sleutel-stap7" tags="" position="4700,700" size="100,100">
+        <h1 style="color: #4CAF50; text-align: center;">🔑 Stap 7: Gebruik een Trucje voor het versleutelen en ontsleutelen!</h1>
+
+        <p>Het is niet handig om elke keer zo'n groot getal te moeten berekenen. Ze worden dan soms zo groot dat zelfs je computer er niks meer van snapt. Daarom gebruiken we een trucje om het ontcijferen van berichten wat makkelijker te maken. Dit trucje heet <strong>modulair vermenigvuldigen</strong></p>
+
+        <h2 style="color: #FF5722;">✨ Wat is dan toch weer Modulair Vermenigvuldigen?</h2>
+        <p>Modulair vermenigvuldigen is een slim wiskundig trucje dat ons helpt om grote getallen klein te houden door telkens de rest (modulo) te berekenen na vermenigvuldigen. Laten we dit stap voor stap uitleggen met een simpel voorbeeld.</p>
+
+        <h3 style="color: #FF5722;">🔍 Voorbeeld: Begrijp <span style="font-family: monospace;">2<sup>10</sup> modulo 17</span></h3>
+        <p>We willen weten wat <span style="font-family: monospace;">2<sup>10</sup> modulo 17</span> is. Dit betekent dat we 2 tien keer met zichzelf vermenigvuldigen en na elke vermenigvuldiging de rest berekenen als we door 17 delen. Je zou deze nog wel met je rekenmachine (of op papier) op de snelste manier kunnen doen.
+            Dan doe je dus 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 x 2 = 1024.
+            En 1024 modulo 17 = 4 (60 x 17 = 1020 dus er blijft 4 over).
+            Dus... dan is 2<sup>10</sup> modulo 17 = 4. Maar, je ziet dus, als je een klein basis getal hebt (2) en het macht getal wordt wat groter, dan krijg je dus grote getallen. 1024 is voor jou nog niet zo groot, maar als je 10 vervang voor 20, dan krijg je als uitkomst van 2<sup>20</sup> al 1048576. Dat is een miljoen achtenveertig duizend vijfhonderd zesenzeventig.. Pfoeee, ik zal maar eerlijk zeggen dat ik die met het rekenmachine heb uitgerekend. Daarom is dus het trucje van modulair vermenigvuldigen handig. Anders kunnen we nooit de sleutels gaan gebruiken.</p>
+
+        <h3 style="color: #FF5722;">🔄 Hoe Werkt Het Stap voor Stap?</h3>
+        <p>Het trucje gaat als volgt, we gaan niet de machten uitrekenen (die staan er in het voorbeeld nog wel bij maar je mag ze eigenlijk negeren, al is het makkelijk om ze er bij te zetten zodat we kunnen bijhouden hoe ver we zijn.) Wat we wel gaan doen is het basis getal pakken, deze modulo 17 doen. En de uitkomst die nemen we mee naar het volgende sommetje. In dit volgende sommetje pakken we weer het basis getal en vermenigvuldigen dat met de uitkomst van de vorige som. En daarna doen we het weer modulo 17. De uitkomst daarvan nemen we weer door naar het volgende sommetje. Dat doen we net zo vaak als dat de <sup>macht</sup> groot is. In ons voorbeeld dus 10 keer. Hier komt ie!</p>
+
+        <ol style="color: #FF5722;">
+            <li>
+                <strong>Stap 1:</strong> <span style="font-family: monospace;">2<sup>1</sup> mod 17 = 2</span>
+                <p>We beginnen met <span style="font-family: monospace;">2<sup>1</sup> = 2</span>. Dus, <strong>2 mod 17 = 2</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 2:</strong> <span style="font-family: monospace;">2<sup>2</sup> mod 17 = 4</span>
+                <p>Nu vermenigvuldigen we het vorige antwoord (2) met het basisgetal (2): <span style="font-family: monospace;">2 × 2 = 4</span>. Dus, <strong>4 mod 17 = 4</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 3:</strong> <span style="font-family: monospace;">2<sup>3</sup> mod 17 = 8</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (4) met het basisgetal (2): <span style="font-family: monospace;">4 × 2 = 8</span>. Dus, <strong>8 mod 17 = 8</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 4:</strong> <span style="font-family: monospace;">2<sup>4</sup> mod 17 = 16</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (8) met het basisgetal (2): <span style="font-family: monospace;">8 × 2 = 16</span>. Dus, <strong>16 mod 17 = 16</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 5:</strong> <span style="font-family: monospace;">2<sup>5</sup> mod 17 = 15</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (16) met het basisgetal (2): <span style="font-family: monospace;">16 × 2 = 32</span>. Neem de rest: <strong>32 mod 17 = 15</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 6:</strong> <span style="font-family: monospace;">2<sup>6</sup> mod 17 = 13</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (15) met het basisgetal (2): <span style="font-family: monospace;">15 × 2 = 30</span>. Neem de rest: <strong>30 mod 17 = 13</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 7:</strong> <span style="font-family: monospace;">2<sup>7</sup> mod 17 = 9</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (13) met het basisgetal (2): <span style="font-family: monospace;">13 × 2 = 26</span>. Neem de rest: <strong>26 mod 17 = 9</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 8:</strong> <span style="font-family: monospace;">2<sup>8</sup> mod 17 = 1</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (9) met het basisgetal (2): <span style="font-family: monospace;">9 × 2 = 18</span>. Neem de rest: <strong>18 mod 17 = 1</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 9:</strong> <span style="font-family: monospace;">2<sup>9</sup> mod 17 = 2</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (1) met het basisgetal (2): <span style="font-family: monospace;">1 × 2 = 2</span>. Dus, <strong>2 mod 17 = 2</strong>.</p>
+            </li>
+            <li>
+                <strong>Stap 10:</strong> <span style="font-family: monospace;">2<sup>10</sup> mod 17 = 4</span>
+                <p>Vermenigvuldig opnieuw het vorige antwoord (2) met het basisgetal (2): <span style="font-family: monospace;">2 × 2 = 4</span>. Dus, <strong>4 mod 17 = 4</strong>.</p>
+            </li>
+        </ol>
+
+        <p><strong>Conclusie:</strong> <span style="font-family: monospace;">2<sup>10</sup> mod 17 = 4</span></p>
+
+        <h2 style="color: #FF5722;">💡 Waarom Dit Werkt</h2>
+        <p>Elke keer dat we vermenigvuldigen, nemen we de rest nadat we door 17 hebben gedeeld. Dit zorgt ervoor dat we niet met te grote getallen hoeven te rekenen en dat de getallen klein blijven. 🧮✨</p>
+
+        <p>
+            <a href="modulairvermenigvuldigen.html">Hier gaan we het nog een keer samen stap voor stap doen maar kun je zelf mee doen.</a>
+        </p>
+
+
+    </tw-passagedata>
 
 
 

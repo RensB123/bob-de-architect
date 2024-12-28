@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Modulair Vermenigvuldigen</title>
+    <style>
+        body {
+            background-color: #F0F8FF;
+            font-family: Arial, sans-serif;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            color: #FF5722;
+        }
+        .step {
+            background-color: #FFF3E0;
+            border: 2px solid #FFCCBC;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+        .step h2 {
+            text-align: center;
+        }
+        .step input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 60%;
+            border: 2px solid #FFAB91;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .step button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #FF7043;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .step button:hover {
+            background-color: #FF5722;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .correct {
+            color: green;
+        }
+        .incorrect {
+            color: red;
+        }
+        .final-result {
+            background-color: #E8F5E9;
+            border: 2px solid #A5D6A7;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            font-size: 20px;
+            color: #2E7D32;
+        }
+        .header-image {
+            width: 150px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .reset-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #607D8B;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .reset-button:hover {
+            background-color: #455A64;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🔑 Modulair Vermenigvuldigen Leren</h1>
+
+<p>Hoi Bob, we gaan hier nog eens oefenen met <strong>modulair vermenigvuldigen</strong>. Dit programmatje gaat je helpen en maakt rekenen makkelijker en sneller! 🚀</p>
+
+<div class="step" id="step0">
+    <h2>Stap 1: Begrijp de Begrippen</h2>
+    <p><strong>Basisgetal (Grondgetal):</strong> Dit is het getal dat je telkens vermenigvuldigt. In ons voorbeeld is dat <strong>2</strong>.</p>
+    <p><strong>Exponent:</strong> Dit is hoe vaak je het basisgetal vermenigvuldigt. We willen <strong>2</strong> tien keer vermenigvuldigen, dus <strong>2<sup>10</sup></strong>.</p>
+    <p><strong>Modulo:</strong> Dit is het getal waar je door deelt om te zien hoeveel er overblijven. In ons voorbeeld is dat <strong>17</strong>.</p>
+    <h3>🔍 Voorbeeld: Begrijp <span style="font-family: monospace;">2<sup>10</sup> mod 17</span></h3>
+    <p>We willen weten wat <span style="font-family: monospace;">2<sup>10</sup> mod 17</span> is. Dit betekent dat we 2 tien keer met zichzelf vermenigvuldigen en na elke vermenigvuldiging de rest berekenen als we door 17 delen.</p>
+    <p>Bijvoorbeeld:</p>
+    <p style="font-family: monospace;">2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1024</p>
+    <p>En 1024 mod 17 = 4 (60 × 17 = 1020 dus er blijft 4 over).</p>
+    <p>Dus, <strong>2<sup>10</sup> mod 17 = 4</strong>.</p>
+    <p>Let op: We gebruiken de exponenten om bij te houden hoeveel keer we vermenigvuldigen, maar we berekenen de machten niet direct. In plaats daarvan vermenigvuldigen we telkens het basisgetal met het resultaat van de vorige stap en nemen we de modulo.</p>
+</div>
+
+<div id="steps-container">
+    <!-- Interactieve stappen komen hier -->
+</div>
+
+<div class="final-result" id="final-result" style="display: none;">
+    🎉 <strong>Gefeliciteerd!</strong> Je hebt alle stappen voltooid. <br>
+    <strong>2<sup>10</sup> mod 17 = 4</strong>
+    <br>
+    <button class="reset-button" onclick="resetExercise()">Oefening Opnieuw Starten</button>
+</div>
+
+<script>
+    const base = 2;
+    const modulo = 17;
+    const exponent = 10;
+    let currentStep = 1;
+    let result = 1; // Begin met 1 voor de eerste stap
+
+    const stepsContainer = document.getElementById('steps-container');
+
+    // Initialize: create the first interactive step
+    createStep(currentStep, result);
+
+    function createStep(stepNumber, previousResult) {
+        // Create a new step div
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'step';
+        stepDiv.id = `interactive-step${stepNumber}`;
+
+        // Titel van de stap
+        const stepTitle = document.createElement('h2');
+        stepTitle.textContent = `Stap ${stepNumber + 1}: Gebruik het Vorige Antwoord`;
+        stepDiv.appendChild(stepTitle);
+
+        // Uitleg van de stap
+        const description = document.createElement('p');
+        description.textContent = 'Vermenigvuldig het antwoord van de vorige stap met het basisgetal en neem de modulo. Let op! negeer de exponenten (tot de macht getallen).';
+        stepDiv.appendChild(description);
+
+        // Formule van de stap
+        const formula = document.createElement('p');
+        formula.innerHTML = `<strong>Formule:</strong> ${base}<sup>${stepNumber}</sup> mod ${modulo} = ?`;
+        stepDiv.appendChild(formula);
+
+        // Vorig antwoord tonen
+        const prevAnswer = document.createElement('p');
+        if (stepNumber !== 1) {
+            prevAnswer.innerHTML = `<strong>Vorig Antwoord:</strong> <span id="prev${stepNumber}">${previousResult}</span>`;
+            stepDiv.appendChild(prevAnswer);
+        } else {
+            prevAnswer.innerHTML = `Voor de eerste stap hebben we nog geen antwoord van het vorige sommetje dus dan mag je het basis getal keer 1 doen en daar de modulo van pakken.`;
+            stepDiv.appendChild(prevAnswer);
+        }
+
+        // Invoerveld voor het antwoord
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.id = `answer${stepNumber}`;
+        input.placeholder = 'Jouw antwoord';
+        stepDiv.appendChild(input);
+
+        // Check knop
+        const button = document.createElement('button');
+        button.textContent = 'Check';
+        button.onclick = () => checkAnswer(stepNumber);
+        stepDiv.appendChild(button);
+
+        // Feedback div
+        const feedback = document.createElement('div');
+        feedback.id = `feedback${stepNumber}`;
+        feedback.className = 'feedback';
+        stepDiv.appendChild(feedback);
+
+        // Voeg de stap toe aan de container
+        stepsContainer.appendChild(stepDiv);
+    }
+
+    function checkAnswer(step) {
+        const userAnswer = parseInt(document.getElementById(`answer${step}`).value);
+        let expected;
+
+        if (step === 1) {
+            // Eerste stap: (base * 1) mod modulo
+            expected = (base * 1) % modulo; // 2 mod 17 = 2
+        } else {
+            // Andere stappen: (result * base) mod modulo
+            expected = (result * base) % modulo;
+        }
+
+        const feedback = document.getElementById(`feedback${step}`);
+
+        if (userAnswer === expected) {
+            feedback.innerHTML = '✅ Correct!';
+            feedback.className = 'feedback correct';
+            // Update resultaat en stap
+            result = userAnswer;
+            currentStep++;
+
+            // Maak de volgende stap als we nog stappen over hebben
+            if (currentStep <= exponent) {
+                createStep(currentStep, result);
+            } else {
+                // Toon het eindresultaat
+                document.getElementById('final-result').style.display = 'block';
+            }
+        } else {
+            feedback.innerHTML = '❌ Oeps! Probeer het opnieuw.';
+            feedback.className = 'feedback incorrect';
+        }
+    }
+
+    function resetExercise() {
+        location.reload();
+    }
+</script>
+
+</body>
+</html>
