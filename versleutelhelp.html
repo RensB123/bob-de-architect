@@ -203,10 +203,10 @@
 </div>
 
 <div class="final-result" id="final-result" style="display: none;">
-    🎉 <strong>Gefeliciteerd!</strong> Je hebt alle stappen voltooid. <br>
+    🎉 <strong>Lekker vriend!</strong> Je hebt het goede antwoord gevonden. <br>
     <strong id="final-result-text"></strong>
     <br>
-    <button onclick="resetExercise()">Oefening Opnieuw Starten</button>
+    <button onclick="resetExercise()">Ga door naar het volgende getal</button>
 </div>
 
 <script>
@@ -340,9 +340,26 @@
 
         const feedback = document.getElementById(`feedback${step}`);
 
+        // Define messages for correct and incorrect answers
+        const correctMessages = [
+            'Lekker bezig Bob!',
+            'Klasse jonge!',
+            'Goedzo vriend, ga zo door!',
+            'Goedzooooo!',
+            'Goed bezig vriend!',
+            'Al weer een goed!',
+            'Lekker hoor! Volgens mij vind je het niet zo moeilijk meer of wel want hij is al weer goed. Ga zo door!'
+        ];
+        const incorrectMessages = [
+            'Aah balen, probeer het nog eens.',
+            'Oeps, niet goed, nog een keer proberen.'
+        ];
+
         if (userAnswer === expected) {
-            feedback.innerHTML = '✅ Correct!';
+            const randomCorrectMessage = correctMessages[Math.floor(Math.random() * correctMessages.length)];
+            feedback.innerHTML = `✅ ${randomCorrectMessage}`;
             feedback.className = 'feedback correct';
+
             // Update resultaat en stap
             result = userAnswer;
             currentStep++;
@@ -356,10 +373,12 @@
                 finalResult.style.display = 'block';
             }
         } else {
-            feedback.innerHTML = '❌ Oeps! Probeer het opnieuw.';
+            const randomIncorrectMessage = incorrectMessages[Math.floor(Math.random() * incorrectMessages.length)];
+            feedback.innerHTML = `❌ ${randomIncorrectMessage}`;
             feedback.className = 'feedback incorrect';
         }
     }
+
 
     function resetExercise() {
         location.reload();
