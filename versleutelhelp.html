@@ -2,6 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Mobile-first -->
     <title>Modulair Vermenigvuldigen</title>
     <style>
         body {
@@ -10,75 +11,91 @@
             color: #333;
             text-align: center;
             padding: 20px;
+            margin: 0;
         }
         h1, h2, h3 {
             color: #FF5722;
+            margin-bottom: 10px;
         }
-        .step {
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        /* Invoervelden Sectie */
+        .input-section {
             background-color: #FFF3E0;
             border: 2px solid #FFCCBC;
             border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
             text-align: left;
-            position: relative;
+            box-sizing: border-box;
+        }
+        .input-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .input-section label {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .input-section input[type="number"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            border: 2px solid #FFAB91;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .input-section button {
+            padding: 12px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .input-section button:hover {
+            background-color: #45a049;
+        }
+        /* Stappen Sectie */
+        .step, .final-result {
+            background-color: #FFF3E0;
+            border: 2px solid #FFCCBC;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
+            text-align: left;
+            box-sizing: border-box;
         }
         .step h2 {
             text-align: center;
+            margin-bottom: 20px;
         }
-        .step .header {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            position: relative;
-        }
-        .step .header .exponent {
-            font-size: 24px;
-            margin-left: 10px;
-            position: relative;
-        }
-        .step .header .exponent::after {
-            content: '→ Deze mag je negeren';
-            font-size: 14px;
-            color: #555;
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 2px 5px;
-            border-radius: 3px;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-        .step .formula {
-            font-size: 18px;
-            margin-bottom: 10px;
-        }
-        .step .input-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .step .input-section input[type="number"] {
+        .step input[type="number"] {
             padding: 10px;
             font-size: 16px;
-            width: 100px;
+            width: 100%;
             border: 2px solid #FFAB91;
             border-radius: 5px;
-            margin-right: 10px;
-        }
-        .step .input-section span {
-            font-size: 18px;
-            margin: 0 10px;
+            margin-top: 10px;
+            box-sizing: border-box;
         }
         .step button {
-            padding: 10px 20px;
+            padding: 12px;
             font-size: 16px;
             background-color: #FF7043;
             color: white;
@@ -86,6 +103,8 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 10px;
+            width: 100%;
+            box-sizing: border-box;
         }
         .step button:hover {
             background-color: #FF5722;
@@ -101,25 +120,22 @@
         .incorrect {
             color: red;
         }
+        /* Eindresultaat Sectie */
         .final-result {
             background-color: #E8F5E9;
             border: 2px solid #A5D6A7;
             border-radius: 10px;
             padding: 20px;
             margin: 20px auto;
-            width: 90%;
+            width: 100%;
             max-width: 600px;
             box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
             font-size: 20px;
             color: #2E7D32;
+            box-sizing: border-box;
         }
-        .header-image {
-            width: 150px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        .reset-button {
-            padding: 10px 20px;
+        .final-result button {
+            padding: 12px;
             font-size: 16px;
             background-color: #607D8B;
             color: white;
@@ -127,89 +143,59 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 20px;
+            width: 100%;
+            box-sizing: border-box;
         }
-        .reset-button:hover {
+        .final-result button:hover {
             background-color: #455A64;
         }
-        /* Style voor de invoervelden sectie */
-        .input-section-top {
-            background-color: #FFF3E0;
-            border: 2px solid #FFCCBC;
-            border-radius: 10px;
-            padding: 20px;
-            margin: 20px auto;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 2px 2px 12px rgba(0,0,0,0.1);
-            text-align: left;
-        }
-        .input-section-top h2 {
-            text-align: center;
+        .header-image {
+            width: 100px;
+            height: auto;
             margin-bottom: 20px;
         }
-        .input-section-top label {
-            display: block;
-            font-size: 16px;
-            margin-bottom: 5px;
-            text-align: left;
-        }
-        .input-section-top input[type="number"] {
-            padding: 10px;
-            font-size: 16px;
-            width: 100%;
-            border: 2px solid #FFAB91;
-            border-radius: 5px;
-            margin-bottom: 15px;
-        }
-        .input-section-top button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .input-section-top button:hover {
-            background-color: #45a049;
+        /* Media Queries voor Grotere Schermen */
+        @media (min-width: 601px) {
+            .step input[type="number"] {
+                width: 60%;
+            }
+            .step button, .final-result button {
+                width: auto;
+                max-width: 200px;
+            }
+            .input-section input[type="number"] {
+                width: 100%;
+            }
+            .input-section button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
 
-<h1>🔑 Modulair Vermenigvuldigen Leren</h1>
-<img src="https://i.imgur.com/5c7J6QH.png" alt="Leer Modulaire Vermenigvuldigen" class="header-image">
+<h1>🔑 Modulair Vermenigvuldigen om versleutelen en ontsleutelen</h1>
 
-<p>Welkom! Vandaag gaan we leren hoe je <strong>modulair vermenigvuldigen</strong> kunt gebruiken om grote getallen klein te houden. Dit maakt rekenen makkelijker en sneller! 🚀</p>
+<p>Hoi Bob, dit programmatje kan je gebruiken om te versleutelen te ontsleutelen. <strong>modulair vermenigvuldigen</strong>. Je kunt zo makkelijker en sneller de sleutels gebruiken. Succes! 🚀</p>
 
-<!-- Invoervelden voor Basis, Macht en Modulo -->
-<div class="input-section-top" id="input-section-top">
-    <h2>Start de Oefening</h2>
-    <label for="base-input">Basisgetal:</label>
-    <input type="number" id="base-input" placeholder="Voer het basisgetal in" min="1">
+<!-- Invoervelden voor Basis, Exponent en Modulo -->
+<div class="input-section" id="input-section">
+    <h2>Start met je getallen</h2>
+    <label for="base-input">Grondgetal (dat is het bericht dat je wilt versleutelen of juist ontsleutelen):</label>
+    <input type="number" id="base-input" placeholder="Voer het grondgetal in" min="1" required>
 
-    <label for="exponent-input">Machtgetal (Aantal Stappen):</label>
-    <input type="number" id="exponent-input" placeholder="Voer het machtgetal in" min="1">
+    <label for="exponent-input">Exponent (dat is dus je sleutel, de publieke als je wilt versleutelen en de prive voor als je wilt ontsleutelen):</label>
+    <input type="number" id="exponent-input" placeholder="Voer het exponent in" min="1" required>
 
     <label for="modulo-input">Modulo:</label>
-    <input type="number" id="modulo-input" placeholder="Voer het modulo-getal in" min="1">
+    <input type="number" id="modulo-input" placeholder="Voer het modulo-getal in" min="1" required>
 
     <button onclick="startExercise()">Start</button>
 </div>
 
-<!-- Uitleg van de Begrippen (blijft zichtbaar) -->
-<div class="step" id="step0">
-    <h2>Stap 1: Begrijp de Begrippen</h2>
-    <p><strong>Basisgetal (Grondgetal):</strong> Dit is het getal dat je telkens vermenigvuldigt.</p>
-    <p><strong>Exponent:</strong> Dit is hoe vaak je het basisgetal vermenigvuldigt. Dit bepaalt het aantal stappen.</p>
-    <p><strong>Modulo:</strong> Dit is het getal waar je door deelt om te zien hoeveel er overblijven.</p>
-    <h3>🔍 Voorbeeld: Begrijp <span style="font-family: monospace;">2<sup>10</sup> mod 17</span></h3>
-    <p>We willen weten wat <span style="font-family: monospace;">2<sup>10</sup> mod 17</span> is. Dit betekent dat we 2 tien keer met zichzelf vermenigvuldigen en na elke vermenigvuldiging de rest berekenen als we door 17 delen.</p>
-    <p>Bijvoorbeeld:</p>
-    <p style="font-family: monospace;">2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 1024</p>
-    <p>En 1024 mod 17 = 4 (60 × 17 = 1020 dus er blijft 4 over).</p>
-    <p>Dus, <strong>2<sup>10</sup> mod 17 = 4</strong>.</p>
-    <p>Let op: We gebruiken de exponenten om bij te houden hoeveel keer we vermenigvuldigen, maar we berekenen de machten niet direct. In plaats daarvan vermenigvuldigen we telkens het basisgetal met het resultaat van de vorige stap en nemen we de modulo.</p>
+<!-- Uitleg van de Begrippen (wordt dynamisch bijgewerkt) -->
+<div class="step" id="step0" style="display: none;">
+    <!-- Dynamische inhoud wordt hier toegevoegd via JavaScript -->
 </div>
 
 <div id="steps-container">
@@ -220,20 +206,21 @@
     🎉 <strong>Gefeliciteerd!</strong> Je hebt alle stappen voltooid. <br>
     <strong id="final-result-text"></strong>
     <br>
-    <button class="reset-button" onclick="resetExercise()">Oefening Opnieuw Starten</button>
+    <button onclick="resetExercise()">Oefening Opnieuw Starten</button>
 </div>
 
 <script>
     let base;
-    let modulo;
     let exponent;
+    let modulo;
     let currentStep = 1;
     let result = 1; // Begin met 1 voor de eerste stap
 
     const stepsContainer = document.getElementById('steps-container');
     const finalResult = document.getElementById('final-result');
     const finalResultText = document.getElementById('final-result-text');
-    const inputSectionTop = document.getElementById('input-section-top');
+    const inputSection = document.getElementById('input-section');
+    const step0 = document.getElementById('step0');
 
     function startExercise() {
         // Haal de ingevoerde waarden op
@@ -243,19 +230,45 @@
 
         // Controleer of de invoervelden correct zijn ingevuld
         if (isNaN(base) || base < 1 || isNaN(exponent) || exponent < 1 || isNaN(modulo) || modulo < 1) {
-            alert('Voer alstublieft geldige positieve getallen in voor basis, macht en modulo.');
+            alert('Voer alstublieft geldige positieve getallen in voor Grondgetal, Exponent en Modulo.');
             return;
         }
 
         // Verberg de invoervelden sectie nadat de oefening is gestart
-        inputSectionTop.style.display = 'none';
+        inputSection.style.display = 'none';
 
-        // Begin met de eerste stap
+        // Update de uitleg van stap 1 met de ingevoerde waarden
+        updateStep0();
+
+        // Toon stap0
+        step0.style.display = 'block';
+
+        // Begin met de eerste interactieve stap
         createStep(currentStep, result);
     }
 
+    function updateStep0() {
+        const calculatedPower = Math.pow(base, exponent);
+        const calculatedMod = calculatedPower % modulo;
+        const quotient = Math.floor(calculatedPower / modulo);
+
+        step0.innerHTML = `
+            <h2>Succes met het versleutelen of ontsleutelen</h2>
+            <p><strong>Grondgetal (Basisgetal):</strong> Dit is je getal dat je wilt versleutelen of ontsleutelen en dus het getal dat je telkens vermenigvuldigt. In jouw geval is dat <strong>${base}</strong>.</p>
+            <p><strong>Exponent:</strong> Dit is hoe vaak je het grondgetal vermenigvuldigt. Dit is dus de publieke of de prive sleutel. We willen <strong>${base}</strong> ${exponent} keer vermenigvuldigen, dus <strong>${base}<sup>${exponent}</sup></strong>.</p>
+            <p><strong>Modulo:</strong> Dit is het getal waar je door deelt om te zien hoeveel er overblijven. In jouw geval is dat <strong>${modulo}</strong>.</p>
+<!--            <h3>🔍 Voorbeeld: Begrijp <span style="font-family: monospace;">${base}<sup>${exponent}</sup> mod ${modulo}</span></h3>-->
+            <p>We willen weten wat <span style="font-family: monospace;">${base}<sup>${exponent}</sup> modulo ${modulo}</span> is. Dit betekent dat we ${base} ${exponent} keer met zichzelf vermenigvuldigen en na elke vermenigvuldiging de rest berekenen als we door ${modulo} delen.</p>
+<!--            <p>Bijvoorbeeld:</p>-->
+<!--            <p style="font-family: monospace;">${Array(exponent).fill(base).join(' × ')} = ${calculatedPower}</p>-->
+<!--            <p>En ${calculatedPower} mod ${modulo} = ${calculatedMod} (${quotient} × ${modulo} = ${quotient * modulo} dus er blijft ${calculatedMod} over).</p>-->
+<!--            <p>Dus, <strong>${base}<sup>${exponent}</sup> mod ${modulo} = ${calculatedMod}</strong>.</p>-->
+<!--            <p>Let op: We gebruiken de exponenten om bij te houden hoeveel keer we vermenigvuldigen, maar we berekenen de machten niet direct. In plaats daarvan vermenigvuldigen we telkens het grondgetal met het resultaat van de vorige stap en nemen we de modulo.</p>-->
+        `;
+    }
+
     function createStep(stepNumber, previousResult) {
-        // Creëer een nieuwe stap div
+        // Create a new step div
         const stepDiv = document.createElement('div');
         stepDiv.className = 'step';
         stepDiv.id = `interactive-step${stepNumber}`;
@@ -265,55 +278,41 @@
         stepTitle.textContent = `Stap ${stepNumber}: Gebruik het Vorige Antwoord`;
         stepDiv.appendChild(stepTitle);
 
-        // Header met basis en exponent en pijltje
-        const header = document.createElement('div');
-        header.className = 'header';
-
-        const baseElement = document.createElement('span');
-        baseElement.innerHTML = `<strong>${base}<sup>${stepNumber}</sup></strong>`;
-        header.appendChild(baseElement);
-
-        stepDiv.appendChild(header);
-
         // Uitleg van de stap
         const description = document.createElement('p');
-        description.textContent = 'Vermenigvuldig het antwoord van de vorige stap met het basisgetal en neem de modulo.';
+        if (stepNumber === 1) {
+            description.innerHTML = 'Voor de eerste stap vermenigvuldig je het grondgetal met 1 en neem je de modulo. Let op! Negeer de exponenten (tot de macht getallen).';
+        } else {
+            description.textContent = 'Vermenigvuldig het antwoord van de vorige stap met het grondgetal en neem de modulo. Let op! Negeer de exponenten (tot de macht getallen).';
+        }
         stepDiv.appendChild(description);
 
         // Formule van de stap
         const formula = document.createElement('p');
-        formula.className = 'formula';
         formula.innerHTML = `<strong>Formule:</strong> ${base}<sup>${stepNumber}</sup> mod ${modulo} = ?`;
         stepDiv.appendChild(formula);
 
         // Vorig antwoord tonen
         const prevAnswer = document.createElement('p');
-        prevAnswer.innerHTML = `<strong>Vorig Antwoord:</strong> <span id="prev${stepNumber}">${previousResult}</span>`;
-        stepDiv.appendChild(prevAnswer);
+        if (stepNumber !== 1) {
+            prevAnswer.innerHTML = `<strong>Vorig Antwoord:</strong> <span id="prev${stepNumber}">${previousResult}</span>`;
+            stepDiv.appendChild(prevAnswer);
+        } else {
+            prevAnswer.innerHTML = `Voor de eerste stap hebben we nog geen antwoord van het vorige sommetje dus dan mag je het grondgetal keer 1 doen en daar de modulo van pakken.`;
+            stepDiv.appendChild(prevAnswer);
+        }
 
-        // Inputsectie
-        const inputSection = document.createElement('div');
-        inputSection.className = 'input-section';
-
+        // Invoerveld voor het antwoord
         const input = document.createElement('input');
         input.type = 'number';
         input.id = `answer${stepNumber}`;
         input.placeholder = 'Jouw antwoord';
-        inputSection.appendChild(input);
-
-        const modText = document.createElement('span');
-        modText.textContent = ` mod ${modulo} = `;
-        inputSection.appendChild(modText);
-
-        const answerSpan = document.createElement('span');
-        answerSpan.id = `result${stepNumber}`;
-        inputSection.appendChild(answerSpan);
-
-        stepDiv.appendChild(inputSection);
+        input.required = true;
+        stepDiv.appendChild(input);
 
         // Check knop
         const button = document.createElement('button');
-        button.textContent = 'Controleren';
+        button.textContent = 'Check';
         button.onclick = () => checkAnswer(stepNumber);
         stepDiv.appendChild(button);
 
@@ -332,22 +331,18 @@
         let expected;
 
         if (step === 1) {
-            // Eerste stap: (base * 1) mod modulo
+            // Eerste stap: (grondgetal * 1) mod modulo
             expected = (base * 1) % modulo;
         } else {
-            // Andere stappen: (result * base) mod modulo
+            // Andere stappen: (result * grondgetal) mod modulo
             expected = (result * base) % modulo;
         }
 
         const feedback = document.getElementById(`feedback${step}`);
-        const resultSpan = document.getElementById(`result${step}`);
 
         if (userAnswer === expected) {
             feedback.innerHTML = '✅ Correct!';
             feedback.className = 'feedback correct';
-            // Toon het antwoord in de formule
-            resultSpan.textContent = userAnswer;
-
             // Update resultaat en stap
             result = userAnswer;
             currentStep++;
